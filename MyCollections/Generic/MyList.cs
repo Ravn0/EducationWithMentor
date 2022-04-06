@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyCollections.Generic
 {
-    class MyList
+    public class MyList
     {
     }
 }
