@@ -1,14 +1,15 @@
 using ExampleTestMyCollections.SourceData;
 using FluentAssertions;
-using MyCollectionsExample;
+using ExampleMyCollections;
 using Xunit;
+
 
 namespace ExampleTestMyCollections.Tests
 {
     public abstract class ExampleTestAbstract
     {
         protected IExampleClass _exampleClass;
-        
+
         [Theory]
         [InlineData(1, 1, 2)]
         [InlineData(0, 0, 0)]
@@ -19,10 +20,25 @@ namespace ExampleTestMyCollections.Tests
 
             actualResult.Should().Be(expected);
         }
-        
+
+        [Fact]
+        public void Sum_Valid_InlineData_2()
+        {
+            // Arrange
+            int x = 1;
+            int y = 2;
+            int expected = 3;
+
+            // Act
+            var actualResult = _exampleClass.Sum(x, y);
+
+            // Assert
+            actualResult.Should().Be(expected);
+        }
+
         [Theory]
         [MemberData(nameof(ExampleClassSourceData.GetDataForBuildCar), MemberType = typeof(ExampleClassSourceData))]
-        public void BuildCar_Valid(Car car, Engine engine,Car expectedCar)
+        public void BuildCar_Valid(Car car, Engine engine, Car expectedCar)
         {
             var actualResult = _exampleClass.BuildCar(car, engine);
 

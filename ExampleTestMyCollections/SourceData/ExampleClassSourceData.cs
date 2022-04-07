@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using MyCollectionsExample;
+using ExampleMyCollections;
 
 namespace ExampleTestMyCollections.SourceData
 {

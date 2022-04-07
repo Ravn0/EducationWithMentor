@@ -1,4 +1,4 @@
-using MyCollectionsExample;
+using ExampleMyCollections;
 
 namespace ExampleTestMyCollections.Tests
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MyCollectionsExample
+namespace ExampleMyCollections
 {
     class Program
     {
