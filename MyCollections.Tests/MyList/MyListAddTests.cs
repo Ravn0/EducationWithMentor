@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace MyCollections.Tests.MyList
 {
-    public class MyListAddTests
+    public class MyListAddAndInsertTests
     {
         [Fact]
         public void Add_Valid_Int()
@@ -18,13 +18,14 @@ namespace MyCollections.Tests.MyList
             expected.Add(2);
 
             // Act
-            MyList<int> actualMyList = new MyList<int>();
+            var actualMyList = new MyList<int>();
             actualMyList.Add(item1);
             actualMyList.Add(item2);
 
             // Assert
             actualMyList.Should().BeEquivalentTo(expected);
         }
+
         [Fact]
         public void Add_Valid_String()
         {
@@ -36,13 +37,14 @@ namespace MyCollections.Tests.MyList
             expected.Add("Alex");
 
             // Act
-            MyList<string> actualMyList = new MyList<string>();
+            var actualMyList = new MyList<string>();
             actualMyList.Add(item1);
             actualMyList.Add(item2);
 
             // Assert
             actualMyList.Should().BeEquivalentTo(expected);
         }
+
         [Fact]
         public void Add_Valid_Double()
         {
@@ -54,13 +56,14 @@ namespace MyCollections.Tests.MyList
             expected.Add(5.5);
 
             // Act
-            MyList<double> actualMyList = new MyList<double>();
+            var actualMyList = new MyList<double>();
             actualMyList.Add(item1);
             actualMyList.Add(item2);
 
             // Assert
             actualMyList.Should().BeEquivalentTo(expected);
         }
+
         [Fact]
         public void Add_Invalid_Char()
         {
@@ -72,7 +75,7 @@ namespace MyCollections.Tests.MyList
             expected.Add('f');
 
             // Act
-            MyList<char> actualMyList = new MyList<char>();
+            var actualMyList = new MyList<char>();
             actualMyList.Add(item1);
             actualMyList.Add(item2);
 
@@ -91,13 +94,14 @@ namespace MyCollections.Tests.MyList
             expected.InsertInStart(2);
 
             // Act
-            MyList<int> actualMyList = new MyList<int>();
+            var actualMyList = new MyList<int>();
             actualMyList.InsertInStart(item1);
             actualMyList.InsertInStart(item2);
 
             // Assert
             actualMyList.Should().BeEquivalentTo(expected);
         }
+
         [Fact]
         public void InsertInStart_Valid_String()
         {
@@ -111,7 +115,7 @@ namespace MyCollections.Tests.MyList
             expected.InsertInStart("Pavlo");
 
             // Act
-            MyList<string> actualMyList = new MyList<string>();
+            var actualMyList = new MyList<string>();
             actualMyList.InsertInStart(item1);
             actualMyList.InsertInStart(item2);
             actualMyList.InsertInStart(item3);
@@ -119,6 +123,7 @@ namespace MyCollections.Tests.MyList
             // Assert
             actualMyList.Should().BeEquivalentTo(expected);
         }
+
         [Fact]
         public void InsertInStart_Valid_Double()
         {
@@ -130,13 +135,14 @@ namespace MyCollections.Tests.MyList
             expected.InsertInStart(5.5);
 
             // Act
-            MyList<double> actualMyList = new MyList<double>();
+            var actualMyList = new MyList<double>();
             actualMyList.InsertInStart(item1);
             actualMyList.InsertInStart(item2);
 
             // Assert
             actualMyList.Should().BeEquivalentTo(expected);
         }
+
         [Fact]
         public void InsertInStart_Invalid_Char()
         {
@@ -148,13 +154,14 @@ namespace MyCollections.Tests.MyList
             expected.InsertInStart('f');
 
             // Act
-            MyList<char> actualMyList = new MyList<char>();
+            var actualMyList = new MyList<char>();
             actualMyList.InsertInStart(item1);
             actualMyList.InsertInStart(item2);
 
             // Assert
             actualMyList.Should().NotBeEquivalentTo(expected);
         }
+
         [Fact]
         public void Insert_Valid_Int()
         {
@@ -178,7 +185,7 @@ namespace MyCollections.Tests.MyList
             expected.Insert(8, 2);
 
             // Act
-            MyList<int> actualMyList = new MyList<int>();
+            var actualMyList = new MyList<int>();
             actualMyList.Add(1);
             actualMyList.Add(2);
             actualMyList.Add(3);
@@ -195,6 +202,7 @@ namespace MyCollections.Tests.MyList
             // Assert
             actualMyList.Should().BeEquivalentTo(expected);
         }
+
         [Fact]
         public void Insert_Valid_String()
         {
@@ -218,7 +226,7 @@ namespace MyCollections.Tests.MyList
             expected.Insert(11, "Pavlo");
 
             // Act
-            MyList<string> actualMyList = new MyList<string>();
+            var actualMyList = new MyList<string>();
             actualMyList.Add("Alex");
             actualMyList.Add("Alex");
             actualMyList.Add("Alex");
@@ -235,6 +243,7 @@ namespace MyCollections.Tests.MyList
             // Assert
             actualMyList.Should().BeEquivalentTo(expected);
         }
+
         [Fact]
         public void Insert_Valid_Double()
         {
@@ -258,7 +267,7 @@ namespace MyCollections.Tests.MyList
             expected.Insert(5, 5.5);
 
             // Act
-            MyList<double> actualMyList = new MyList<double>();
+            var actualMyList = new MyList<double>();
             actualMyList.Add(1.1);
             actualMyList.Add(1.1);
             actualMyList.Add(1.1);
@@ -275,6 +284,7 @@ namespace MyCollections.Tests.MyList
             // Assert
             actualMyList.Should().BeEquivalentTo(expected);
         }
+
         [Fact]
         public void Insert_Invalid_Char()
         {
@@ -298,7 +308,7 @@ namespace MyCollections.Tests.MyList
             expected.Insert(6, 't');
 
             // Act
-            MyList<char> actualMyList = new MyList<char>();
+            var actualMyList = new MyList<char>();
             actualMyList.Add('1');
             actualMyList.Add('1');
             actualMyList.Add('1');
@@ -315,6 +325,7 @@ namespace MyCollections.Tests.MyList
             // Assert
             actualMyList.Should().NotBeEquivalentTo(expected);
         }
+
         [Fact]
         public void AddRange_Valid_Int()
         {
@@ -326,13 +337,14 @@ namespace MyCollections.Tests.MyList
             expected.AddRange(new int[] { 2, 3, 4, 5 });
 
             // Act
-            MyList<int> actualMyList = new MyList<int>();
+            var actualMyList = new MyList<int>();
             actualMyList.AddRange(item1);
             actualMyList.AddRange(item2);
 
             // Assert
             actualMyList.Should().BeEquivalentTo(expected);
         }
+
         [Fact]
         public void AddRange_Valid_String()
         {
@@ -344,13 +356,14 @@ namespace MyCollections.Tests.MyList
             expected.AddRange(new string[] { "Pavlo", "Ivan" });
 
             // Act
-            MyList<string> actualMyList = new MyList<string>();
+            var actualMyList = new MyList<string>();
             actualMyList.AddRange(item1);
             actualMyList.AddRange(item2);
 
             // Assert
             actualMyList.Should().BeEquivalentTo(expected);
         }
+
         [Fact]
         public void AddRange_Valid_Double()
         {
@@ -362,13 +375,14 @@ namespace MyCollections.Tests.MyList
             expected.AddRange(new double[] { 5.1, 6.2, 7.3 });
 
             // Act
-            MyList<double> actualMyList = new MyList<double>();
+            var actualMyList = new MyList<double>();
             actualMyList.AddRange(item1);
             actualMyList.AddRange(item2);
 
             // Assert
             actualMyList.Should().BeEquivalentTo(expected);
         }
+
         [Fact]
         public void AddRange_Invalid_Char()
         {
@@ -380,13 +394,14 @@ namespace MyCollections.Tests.MyList
             expected.AddRange(new char[] { 'q', 'w', 'e' });
 
             // Act
-            MyList<char> actualMyList = new MyList<char>();
+            var actualMyList = new MyList<char>();
             actualMyList.AddRange(item1);
             actualMyList.AddRange(item2);
 
             // Assert
             actualMyList.Should().NotBeEquivalentTo(expected);
         }
+
         [Fact]
         public void InsertRangeInStart_Valid_Int()
         {
@@ -398,13 +413,14 @@ namespace MyCollections.Tests.MyList
             expected.InsertRangeInStart(new int[] { 2, 3, 4, 5 });
 
             // Act
-            MyList<int> actualMyList = new MyList<int>();
+            var actualMyList = new MyList<int>();
             actualMyList.InsertRangeInStart(item1);
             actualMyList.InsertRangeInStart(item2);
 
             // Assert
             actualMyList.Should().BeEquivalentTo(expected);
         }
+
         [Fact]
         public void InsertRangeInStart_Valid_String()
         {
@@ -416,13 +432,14 @@ namespace MyCollections.Tests.MyList
             expected.InsertRangeInStart(new string[] { "Pavlo", "Ivan" });
 
             // Act
-            MyList<string> actualMyList = new MyList<string>();
+            var actualMyList = new MyList<string>();
             actualMyList.InsertRangeInStart(item1);
             actualMyList.InsertRangeInStart(item2);
 
             // Assert
             actualMyList.Should().BeEquivalentTo(expected);
         }
+
         [Fact]
         public void InsertRangeInStart_Valid_Double()
         {
@@ -434,13 +451,14 @@ namespace MyCollections.Tests.MyList
             expected.InsertRangeInStart(new double[] { 5.1, 6.2, 7.3 });
 
             // Act
-            MyList<double> actualMyList = new MyList<double>();
+            var actualMyList = new MyList<double>();
             actualMyList.InsertRangeInStart(item1);
             actualMyList.InsertRangeInStart(item2);
 
             // Assert
             actualMyList.Should().BeEquivalentTo(expected);
         }
+
         [Fact]
         public void InsertRangeInStart_Invalid_Char()
         {
@@ -452,13 +470,14 @@ namespace MyCollections.Tests.MyList
             expected.InsertRangeInStart(new char[] { 'q', 'w', 'e' });
 
             // Act
-            MyList<char> actualMyList = new MyList<char>();
+            var actualMyList = new MyList<char>();
             actualMyList.InsertRangeInStart(item1);
             actualMyList.InsertRangeInStart(item2);
 
             // Assert
             actualMyList.Should().NotBeEquivalentTo(expected);
         }
+
         [Fact]
         public void InsertRange_Valid_Int()
         {
@@ -482,7 +501,7 @@ namespace MyCollections.Tests.MyList
             expected.InsertRange(8, new int[] { 6, 7, 8, 9, 10 });
 
             // Act
-            MyList<int> actualMyList = new MyList<int>();
+            var actualMyList = new MyList<int>();
             actualMyList.Add(1);
             actualMyList.Add(2);
             actualMyList.Add(3);
@@ -499,6 +518,7 @@ namespace MyCollections.Tests.MyList
             // Assert
             actualMyList.Should().BeEquivalentTo(expected);
         }
+
         [Fact]
         public void InsertRange_Valid_String()
         {
@@ -522,7 +542,7 @@ namespace MyCollections.Tests.MyList
             expected.InsertRange(11, new string[] { "Ivan", "Igor" });
 
             // Act
-            MyList<string> actualMyList = new MyList<string>();
+            var actualMyList = new MyList<string>();
             actualMyList.Add("Alex");
             actualMyList.Add("Alex");
             actualMyList.Add("Alex");
@@ -539,6 +559,7 @@ namespace MyCollections.Tests.MyList
             // Assert
             actualMyList.Should().BeEquivalentTo(expected);
         }
+
         [Fact]
         public void InsertRange_Valid_Double()
         {
@@ -562,7 +583,7 @@ namespace MyCollections.Tests.MyList
             expected.InsertRange(5, new double[] { 5.1, 6.2, 7.3, 8.4, 9.5 });
 
             // Act
-            MyList<double> actualMyList = new MyList<double>();
+            var actualMyList = new MyList<double>();
             actualMyList.Add(1.1);
             actualMyList.Add(1.1);
             actualMyList.Add(1.1);
@@ -579,6 +600,7 @@ namespace MyCollections.Tests.MyList
             // Assert
             actualMyList.Should().BeEquivalentTo(expected);
         }
+
         [Fact]
         public void InsertRange_Invalid_Char()
         {
@@ -602,7 +624,7 @@ namespace MyCollections.Tests.MyList
             expected.InsertRange(6, new char[] { 'a', 's', 'd' });
 
             // Act
-            MyList<char> actualMyList = new MyList<char>();
+            var actualMyList = new MyList<char>();
             actualMyList.Add('1');
             actualMyList.Add('1');
             actualMyList.Add('1');
