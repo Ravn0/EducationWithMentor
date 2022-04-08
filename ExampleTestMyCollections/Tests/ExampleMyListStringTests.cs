@@ -2,9 +2,9 @@ using ExampleMyCollections;
 
 namespace ExampleTestMyCollections.Tests
 {
-    public class ExampleMyListTests : ExampleTestAbstract
+    public class ExampleMyListStringTests: ExampleTestAbstract<string>
     {
-        public ExampleMyListTests()
+        public ExampleMyListStringTests()
         {
             _exampleClass = new ExampleClass();
         }

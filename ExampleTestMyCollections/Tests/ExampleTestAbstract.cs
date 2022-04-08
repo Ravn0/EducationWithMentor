@@ -6,7 +6,7 @@ using Xunit;
 
 namespace ExampleTestMyCollections.Tests
 {
-    public abstract class ExampleTestAbstract
+    public abstract class ExampleTestAbstract<T>
     {
         protected IExampleClass _exampleClass;
 
