@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace MyCollections.Generic
 {
@@ -44,7 +45,7 @@ namespace MyCollections.Generic
         public void Add(T item)
         {
             var countObj = 1;
-            _array = GetNewArray(countObj);
+            _array = ResizeArray(countObj);
 
             _array[Count] = item;
             AddCount(countObj);
@@ -71,7 +72,7 @@ namespace MyCollections.Generic
         public void Insert(int index, T item)
         {
             var countObj = 1;
-            _array = GetNewArray(countObj);
+            _array = ResizeArray(countObj);
             if (ValidateIndex(index, Count))
             {
                 for (int i = Count; i > index; i--)
@@ -125,12 +126,62 @@ namespace MyCollections.Generic
             InsertRange(0, array);
         }
 
-        private T[] GetNewArray(int countObjects)
+        public override string ToString()
+        {
+            StringBuilder result = new StringBuilder();
+
+            for (int i = 0; i < Count; i++)
+            {
+                if (result.Length == 0)
+                {
+                    result.Append($"{_array[i]}");
+                }
+                else
+                {
+                    result.AppendFormat(", {0}", _array[i]);
+                }
+            }
+
+            return result.ToString();
+        }
+
+        public override bool Equals(object obj)
+        {
+            bool result = false;
+
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            if (obj is MyList<T> other)
+            {
+                other = (MyList<T>)obj;
+                result = true;
+
+                if (Count != other.Count)
+                {
+                    result = false;
+                }
+
+                for (int i = 0; i < Count && result; i++)
+                {
+                    if (!this._array[i].Equals(other._array[i]))
+                    {
+                        result = false;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private T[] ResizeArray(int countObjects)
         {
             if (_array.Length <= (Count + countObjects))
             {
-                var tempArray = (T[]) _array.Clone();
-                var additionalLength = (int) (_array.Length * _coefficient);
+                var tempArray = (T[])_array.Clone();
+                var additionalLength = (int)(_array.Length * _coefficient);
                 if (additionalLength <= countObjects)
                 {
                     additionalLength += countObjects;

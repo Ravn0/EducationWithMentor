@@ -48,5 +48,19 @@ namespace MyCollections.Tests.SourceData
                 100,
             };
         }
+        public static IEnumerable<object[]> GetDataForAddTest()
+        {
+            var collection = new MyList<int>();
+            for (int i = 0; i < 1; i++)
+            {
+                collection.Add(i);
+            }
+
+            yield return new object[]
+            {
+                0,
+                collection,
+            };
+        }
     }
 }

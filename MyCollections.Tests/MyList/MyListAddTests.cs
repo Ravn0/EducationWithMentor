@@ -2,7 +2,6 @@
 using Xunit;
 using MyCollections.Generic;
 using FluentAssertions;
-using System.Collections.Generic;
 using MyCollections.Tests.SourceData;
 
 namespace MyCollections.Tests.MyList
@@ -44,7 +43,16 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [InlineData(new int[] {0, 10}, 2)]
+        [MemberData(nameof(MyListSourceData.GetDataForAddTest), MemberType = typeof(MyListSourceData))]
+        public void Add_Valid_Equals_Int(int value, MyList<int> expectedСollection)
+        {
+            _collection.Add(value);
+
+            _collection.Should().BeEquivalentTo(expectedСollection);
+        }
+
+        [Theory]
+        [InlineData(new int[] { 0, 10 }, 2)]
         public void AddRange_Valid_1(int[] values, int expectedCount)
         {
             _collection.AddRange(values);
@@ -68,7 +76,7 @@ namespace MyCollections.Tests.MyList
             actualMyList.Add(item2);
 
             // Assert
-            actualMyList.Should().BeEquivalentTo(expected);
+            actualMyList.Should().Be(expected);
         }
 
         [Theory]
@@ -375,11 +383,11 @@ namespace MyCollections.Tests.MyList
         public void AddRange_Valid_Int()
         {
             // Arrange
-            var item1 = new int[] {1, 2, 3, 4};
-            var item2 = new int[] {2, 3, 4, 5};
+            var item1 = new int[] { 1, 2, 3, 4 };
+            var item2 = new int[] { 2, 3, 4, 5 };
             var expected = new MyList<int>();
-            expected.AddRange(new int[] {1, 2, 3, 4});
-            expected.AddRange(new int[] {2, 3, 4, 5});
+            expected.AddRange(new int[] { 1, 2, 3, 4 });
+            expected.AddRange(new int[] { 2, 3, 4, 5 });
 
             // Act
             var actualMyList = new MyList<int>();
@@ -394,11 +402,11 @@ namespace MyCollections.Tests.MyList
         public void AddRange_Valid_String()
         {
             // Arrange
-            var item1 = new string[] {"Tom", "Alex"};
-            var item2 = new string[] {"Pavlo", "Ivan"};
+            var item1 = new string[] { "Tom", "Alex" };
+            var item2 = new string[] { "Pavlo", "Ivan" };
             var expected = new MyList<string>();
-            expected.AddRange(new string[] {"Tom", "Alex"});
-            expected.AddRange(new string[] {"Pavlo", "Ivan"});
+            expected.AddRange(new string[] { "Tom", "Alex" });
+            expected.AddRange(new string[] { "Pavlo", "Ivan" });
 
             // Act
             var actualMyList = new MyList<string>();
@@ -413,11 +421,11 @@ namespace MyCollections.Tests.MyList
         public void AddRange_Valid_Double()
         {
             // Arrange
-            var item1 = new double[] {1.1, 1.2, 1.3};
-            var item2 = new double[] {5.1, 6.2, 7.3};
+            var item1 = new double[] { 1.1, 1.2, 1.3 };
+            var item2 = new double[] { 5.1, 6.2, 7.3 };
             var expected = new MyList<double>();
-            expected.AddRange(new double[] {1.1, 1.2, 1.3});
-            expected.AddRange(new double[] {5.1, 6.2, 7.3});
+            expected.AddRange(new double[] { 1.1, 1.2, 1.3 });
+            expected.AddRange(new double[] { 5.1, 6.2, 7.3 });
 
             // Act
             var actualMyList = new MyList<double>();
@@ -432,11 +440,11 @@ namespace MyCollections.Tests.MyList
         public void AddRange_Invalid_Char()
         {
             // Arrange
-            var item1 = new char[] {'1', '2', '3'};
-            var item2 = new char[] {'q', 'w', 'e'};
+            var item1 = new char[] { '1', '2', '3' };
+            var item2 = new char[] { 'q', 'w', 'e' };
             var expected = new MyList<char>();
-            expected.AddRange(new char[] {'1', '2', '3', '4'});
-            expected.AddRange(new char[] {'q', 'w', 'e'});
+            expected.AddRange(new char[] { '1', '2', '3', '4' });
+            expected.AddRange(new char[] { 'q', 'w', 'e' });
 
             // Act
             var actualMyList = new MyList<char>();
@@ -451,11 +459,11 @@ namespace MyCollections.Tests.MyList
         public void InsertRangeInStart_Valid_Int()
         {
             // Arrange
-            var item1 = new int[] {1, 2, 3, 4};
-            var item2 = new int[] {2, 3, 4, 5};
+            var item1 = new int[] { 1, 2, 3, 4 };
+            var item2 = new int[] { 2, 3, 4, 5 };
             var expected = new MyList<int>();
-            expected.InsertRangeInStart(new int[] {1, 2, 3, 4});
-            expected.InsertRangeInStart(new int[] {2, 3, 4, 5});
+            expected.InsertRangeInStart(new int[] { 1, 2, 3, 4 });
+            expected.InsertRangeInStart(new int[] { 2, 3, 4, 5 });
 
             // Act
             var actualMyList = new MyList<int>();
@@ -470,11 +478,11 @@ namespace MyCollections.Tests.MyList
         public void InsertRangeInStart_Valid_String()
         {
             // Arrange
-            var item1 = new string[] {"Tom", "Alex"};
-            var item2 = new string[] {"Pavlo", "Ivan"};
+            var item1 = new string[] { "Tom", "Alex" };
+            var item2 = new string[] { "Pavlo", "Ivan" };
             var expected = new MyList<string>();
-            expected.InsertRangeInStart(new string[] {"Tom", "Alex"});
-            expected.InsertRangeInStart(new string[] {"Pavlo", "Ivan"});
+            expected.InsertRangeInStart(new string[] { "Tom", "Alex" });
+            expected.InsertRangeInStart(new string[] { "Pavlo", "Ivan" });
 
             // Act
             var actualMyList = new MyList<string>();
@@ -489,11 +497,11 @@ namespace MyCollections.Tests.MyList
         public void InsertRangeInStart_Valid_Double()
         {
             // Arrange
-            var item1 = new double[] {1.1, 1.2, 1.3};
-            var item2 = new double[] {5.1, 6.2, 7.3};
+            var item1 = new double[] { 1.1, 1.2, 1.3 };
+            var item2 = new double[] { 5.1, 6.2, 7.3 };
             var expected = new MyList<double>();
-            expected.InsertRangeInStart(new double[] {1.1, 1.2, 1.3});
-            expected.InsertRangeInStart(new double[] {5.1, 6.2, 7.3});
+            expected.InsertRangeInStart(new double[] { 1.1, 1.2, 1.3 });
+            expected.InsertRangeInStart(new double[] { 5.1, 6.2, 7.3 });
 
             // Act
             var actualMyList = new MyList<double>();
@@ -508,11 +516,11 @@ namespace MyCollections.Tests.MyList
         public void InsertRangeInStart_Invalid_Char()
         {
             // Arrange
-            var item1 = new char[] {'1', '2', '3'};
-            var item2 = new char[] {'q', 'w', 'e'};
+            var item1 = new char[] { '1', '2', '3' };
+            var item2 = new char[] { 'q', 'w', 'e' };
             var expected = new MyList<char>();
-            expected.InsertRangeInStart(new char[] {'1', '2', '3', '4'});
-            expected.InsertRangeInStart(new char[] {'q', 'w', 'e'});
+            expected.InsertRangeInStart(new char[] { '1', '2', '3', '4' });
+            expected.InsertRangeInStart(new char[] { 'q', 'w', 'e' });
 
             // Act
             var actualMyList = new MyList<char>();
@@ -527,9 +535,9 @@ namespace MyCollections.Tests.MyList
         public void InsertRange_Valid_Int()
         {
             // Arrange
-            var item1 = new int[] {1, 2, 3, 4, 5};
+            var item1 = new int[] { 1, 2, 3, 4, 5 };
             int index1 = 3;
-            var item2 = new int[] {6, 7, 8, 9, 10};
+            var item2 = new int[] { 6, 7, 8, 9, 10 };
             int index2 = 8;
             var expected = new MyList<int>();
             expected.Add(1);
@@ -542,8 +550,8 @@ namespace MyCollections.Tests.MyList
             expected.Add(8);
             expected.Add(9);
             expected.Add(10);
-            expected.InsertRange(3, new int[] {1, 2, 3, 4, 5});
-            expected.InsertRange(8, new int[] {6, 7, 8, 9, 10});
+            expected.InsertRange(3, new int[] { 1, 2, 3, 4, 5 });
+            expected.InsertRange(8, new int[] { 6, 7, 8, 9, 10 });
 
             // Act
             var actualMyList = new MyList<int>();
@@ -568,9 +576,9 @@ namespace MyCollections.Tests.MyList
         public void InsertRange_Valid_String()
         {
             // Arrange
-            var item1 = new string[] {"Tom", "Pavlo"};
+            var item1 = new string[] { "Tom", "Pavlo" };
             int index1 = 0;
-            var item2 = new string[] {"Ivan", "Igor"};
+            var item2 = new string[] { "Ivan", "Igor" };
             int index2 = 11;
             var expected = new MyList<string>();
             expected.Add("Alex");
@@ -583,8 +591,8 @@ namespace MyCollections.Tests.MyList
             expected.Add("Alex");
             expected.Add("Alex");
             expected.Add("Alex");
-            expected.InsertRange(0, new string[] {"Tom", "Pavlo"});
-            expected.InsertRange(11, new string[] {"Ivan", "Igor"});
+            expected.InsertRange(0, new string[] { "Tom", "Pavlo" });
+            expected.InsertRange(11, new string[] { "Ivan", "Igor" });
 
             // Act
             var actualMyList = new MyList<string>();
@@ -609,9 +617,9 @@ namespace MyCollections.Tests.MyList
         public void InsertRange_Valid_Double()
         {
             // Arrange
-            var item1 = new double[] {1.1, 1.2, 1.3, 1.4};
+            var item1 = new double[] { 1.1, 1.2, 1.3, 1.4 };
             int index1 = 2;
-            var item2 = new double[] {5.1, 6.2, 7.3, 8.4, 9.5};
+            var item2 = new double[] { 5.1, 6.2, 7.3, 8.4, 9.5 };
             int index2 = 5;
             var expected = new MyList<double>();
             expected.Add(1.1);
@@ -624,8 +632,8 @@ namespace MyCollections.Tests.MyList
             expected.Add(1.1);
             expected.Add(1.1);
             expected.Add(1.1);
-            expected.InsertRange(2, new double[] {1.1, 1.2, 1.3, 1.4});
-            expected.InsertRange(5, new double[] {5.1, 6.2, 7.3, 8.4, 9.5});
+            expected.InsertRange(2, new double[] { 1.1, 1.2, 1.3, 1.4 });
+            expected.InsertRange(5, new double[] { 5.1, 6.2, 7.3, 8.4, 9.5 });
 
             // Act
             var actualMyList = new MyList<double>();
@@ -650,9 +658,9 @@ namespace MyCollections.Tests.MyList
         public void InsertRange_Invalid_Char()
         {
             // Arrange
-            var item1 = new char[] {'1', '2', '3'};
+            var item1 = new char[] { '1', '2', '3' };
             int index1 = 4;
-            var item2 = new char[] {'q', 'w', 'e'};
+            var item2 = new char[] { 'q', 'w', 'e' };
             int index2 = 4;
             var expected = new MyList<char>();
             expected.Add('1');
@@ -665,8 +673,8 @@ namespace MyCollections.Tests.MyList
             expected.Add('1');
             expected.Add('1');
             expected.Add('1');
-            expected.InsertRange(5, new char[] {'1', '2', '3', '4'});
-            expected.InsertRange(6, new char[] {'a', 's', 'd'});
+            expected.InsertRange(5, new char[] { '1', '2', '3', '4' });
+            expected.InsertRange(6, new char[] { 'a', 's', 'd' });
 
             // Act
             var actualMyList = new MyList<char>();
