@@ -42,6 +42,10 @@ namespace MyCollections.Generic
             _array = new T[_defaultCapacity];
         }
 
+        /// <summary>
+        /// Adds an element to the end of the MyList<T>
+        /// </summary>
+        /// <param name="item">Value to be added</param>
         public void Add(T item)
         {
             var countObj = 1;
@@ -51,6 +55,44 @@ namespace MyCollections.Generic
             AddCount(countObj);
         }
 
+        /// <summary>
+        /// Insert an element into the MyList<T> at the specified index
+        /// </summary>
+        /// <param name="index">The index at which the value is inserted</param>
+        /// <param name="item">Value to be added</param>
+        public void Insert(int index, T item)
+        {
+            var countObj = 1;
+            _array = ResizeArray(countObj);
+            if (ValidateIndex(index, Count))
+            {
+                for (int i = Count; i > index; i--)
+                {
+                    _array[i] = _array[i - 1];
+
+                    if (i - 1 == index)
+                    {
+                        _array[i - 1] = item;
+                        AddCount(countObj);
+                        break;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Adds an element to the start of the MyList<T>
+        /// </summary>
+        /// <param name="item">Value to be added</param>
+        public void InsertInStart(T item)
+        {
+            Insert(index: 0, item);
+        }
+
+        /// <summary>
+        /// Adds the elements of the array to the end of the MyList<T>
+        /// </summary>
+        /// <param name="array">Array to be added</param>
         public void AddRange(T[] array)
         {
             newArray = new T[_array.Length + array.Length];
@@ -68,32 +110,11 @@ namespace MyCollections.Generic
             _array = newArray;
         }
 
-
-        public void Insert(int index, T item)
-        {
-            var countObj = 1;
-            _array = ResizeArray(countObj);
-            if (ValidateIndex(index, Count))
-            {
-                for (int i = Count; i > index; i--)
-                {
-                    if (i - 1 == index)
-                    {
-                        _array[i - 1] = item;
-                        AddCount(countObj);
-                        break;
-                    }
-
-                    _array[i] = _array[i - 1];
-                }
-            }
-        }
-
-        public void InsertInStart(T item)
-        {
-            Insert(0, item);
-        }
-
+        /// <summary>
+        /// Insert array elements into the MyList<T> at the specified index
+        /// </summary>
+        /// <param name="index">The index at which the value is inserted</param>
+        /// <param name="array">Array to be added</param>
         public void InsertRange(int index, T[] array)
         {
             newArray = new T[_array.Length + array.Length];
@@ -121,9 +142,13 @@ namespace MyCollections.Generic
             _array = newArray;
         }
 
+        /// <summary>
+        /// Insert array elements at the start of the MyList<T>
+        /// </summary>
+        /// <param name="array">Array to be added</param>
         public void InsertRangeInStart(T[] array)
         {
-            InsertRange(0, array);
+            InsertRange(index: 0, array);
         }
 
         public override string ToString()
@@ -166,7 +191,12 @@ namespace MyCollections.Generic
 
                 for (int i = 0; i < Count && result; i++)
                 {
-                    if (!this._array[i].Equals(other._array[i]))
+                    if (_array[i] == null && other._array[i] == null)
+                    {
+                        continue;
+                    }
+
+                    if (!_array[i].Equals(other._array[i]))
                     {
                         result = false;
                     }
@@ -176,6 +206,11 @@ namespace MyCollections.Generic
             return result;
         }
 
+        /// <summary>
+        /// Change the number of elements in an array while keeping the contents
+        /// </summary>
+        /// <param name="countObjects">The number of objects to insert into the array</param>
+        /// <returns></returns>
         private T[] ResizeArray(int countObjects)
         {
             if (_array.Length <= (Count + countObjects))
