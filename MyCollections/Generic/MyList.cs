@@ -117,15 +117,15 @@ namespace MyCollections.Generic
                 var countObj = array.Length;
                 _array = ResizeArray(countObj);
                 var actualIndex = Count + array.Length - 1;
-                for (int i = Count - 1; actualIndex >= index + array.Length; i--)
+
+                for (int i = Count - 1; i >= index && actualIndex >= index + array.Length; i--)
                 {
-                    _array[actualIndex] = _array[i];
-                    actualIndex--;
+                    _array[actualIndex--] = _array[i];
                 }
+
                 for (int i = array.Length - 1; i >= 0; i--)
                 {
-                    _array[actualIndex] = array[i];
-                    actualIndex--;
+                    _array[actualIndex--] = array[i];
                 }
 
                 AddCount(countObj);
