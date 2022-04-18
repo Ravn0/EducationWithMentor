@@ -6,7 +6,6 @@ namespace MyCollections.Generic
     public class MyList<T> : IMyCollection<T>
     {
         private T[] _array = Array.Empty<T>();
-        private T[] newArray = Array.Empty<T>();
 
         private readonly int _defaultCapacity = 8;
         private readonly double _coefficient = 0.3;
@@ -62,10 +61,10 @@ namespace MyCollections.Generic
         /// <param name="item">Value to be added</param>
         public void Insert(int index, T item)
         {
-            var countObj = 1;
-            _array = ResizeArray(countObj);
             if (ValidateIndex(index, Count))
             {
+                var countObj = 1;
+                _array = ResizeArray(countObj);
                 for (int i = Count; i > index; i--)
                 {
                     _array[i] = _array[i - 1];
@@ -95,19 +94,15 @@ namespace MyCollections.Generic
         /// <param name="array">Array to be added</param>
         public void AddRange(T[] array)
         {
-            newArray = new T[_array.Length + array.Length];
-
-            for (int i = 0; i < _array.Length; i++)
-            {
-                newArray[i] = _array[i];
-            }
+            var countObj = array.Length;
+            _array = ResizeArray(countObj);
 
             for (int i = 0; i < array.Length; i++)
             {
-                newArray[_array.Length + i] = array[i];
+                _array[Count + i] = array[i];
             }
 
-            _array = newArray;
+            AddCount(countObj);
         }
 
         /// <summary>
@@ -117,29 +112,24 @@ namespace MyCollections.Generic
         /// <param name="array">Array to be added</param>
         public void InsertRange(int index, T[] array)
         {
-            newArray = new T[_array.Length + array.Length];
-
-            if (index > _array.Length)
+            if (ValidateIndex(index, Count))
             {
-                return;
-            }
+                var countObj = array.Length;
+                _array = ResizeArray(countObj);
+                var actualIndex = Count + array.Length - 1;
+                for (int i = Count - 1; actualIndex >= index + array.Length; i--)
+                {
+                    _array[actualIndex] = _array[i];
+                    actualIndex--;
+                }
+                for (int i = array.Length - 1; i >= 0; i--)
+                {
+                    _array[actualIndex] = array[i];
+                    actualIndex--;
+                }
 
-            for (int i = 0; i < _array.Length && i < index; i++)
-            {
-                newArray[i] = _array[i];
+                AddCount(countObj);
             }
-
-            for (int i = 0; i < array.Length; i++)
-            {
-                newArray[index + i] = array[i];
-            }
-
-            for (int i = index; i < _array.Length; i++)
-            {
-                newArray[i + array.Length] = _array[i];
-            }
-
-            _array = newArray;
         }
 
         /// <summary>

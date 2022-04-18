@@ -56,12 +56,12 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceData.GetDataForAddValidIntByEquals), MemberType = typeof(MyListSourceData))]
-        public void Add_Valid_Int_By_Equals(int[] value, IMyCollection<int> expectedСollection)
+        public void Add_Valid_Int_By_Equals(int[] values, IMyCollection<int> expectedСollection)
         {
             // Act
-            for (int i = 0; i < value.Length; i++)
+            for (int i = 0; i < values.Length; i++)
             {
-                _collectionInt.Add(value[i]);
+                _collectionInt.Add(values[i]);
             }
 
             // Assert
@@ -114,11 +114,11 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceData.GetDataForAddValidClassByEquals), MemberType = typeof(MyListSourceData))]
-        public void Add_Valid_Class_By_Equals(Employee[] value, MyList<Employee> expectedСollection)
+        public void Add_Valid_Class_By_Equals(Employee[] values, MyList<Employee> expectedСollection)
         {
-            for (int i = 0; i < value.Length; i++)
+            for (int i = 0; i < values.Length; i++)
             {
-                _collectionClass.Add(value[i]);
+                _collectionClass.Add(values[i]);
             }
 
             _collectionClass.Should().Be(expectedСollection);
@@ -161,15 +161,15 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceData.GetDataForInsertInStartValidIntByEquals), MemberType = typeof(MyListSourceData))]
-        public void InsertInStart_Valid_Int_By_Equals(int[] value, IMyCollection<int> expectedСollection)
+        public void InsertInStart_Valid_Int_By_Equals(int[] values, IMyCollection<int> expectedСollection)
         {
             // Arrange
             _collectionInt.Add(0);
 
             // Act
-            for (int i = 0; i < value.Length; i++)
+            for (int i = 0; i < values.Length; i++)
             {
-                _collectionInt.InsertInStart(value[i]);
+                _collectionInt.InsertInStart(values[i]);
             }
 
             // Assert
@@ -225,13 +225,13 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceData.GetDataForInsertInStartValidClassByEquals), MemberType = typeof(MyListSourceData))]
-        public void InsertInStart_Valid_Class_By_Equals(Employee[] value, MyList<Employee> expectedСollection)
+        public void InsertInStart_Valid_Class_By_Equals(Employee[] values, MyList<Employee> expectedСollection)
         {
             _collectionClass.Add(new Employee { Name = "Alex", Age = 23 });
 
-            for (int i = 0; i < value.Length; i++)
+            for (int i = 0; i < values.Length; i++)
             {
-                _collectionClass.InsertInStart(value[i]);
+                _collectionClass.InsertInStart(values[i]);
             }
 
             _collectionClass.Should().Be(expectedСollection);
@@ -276,7 +276,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceData.GetDataForInsertValidIntByEquals), MemberType = typeof(MyListSourceData))]
-        public void Insert_Valid_Int_By_Equals(int[] index, int[] value, IMyCollection<int> expectedСollection)
+        public void Insert_Valid_Int_By_Equals(int[] indexes, int[] values, IMyCollection<int> expectedСollection)
         {
             // Arrange
             for (int i = 0; i < 100; i++)
@@ -285,9 +285,9 @@ namespace MyCollections.Tests.MyList
             }
 
             // Act
-            for (int i = 0; i < value.Length; i++)
+            for (int i = 0; i < values.Length; i++)
             {
-                _collectionInt.Insert(index[i], value[i]);
+                _collectionInt.Insert(indexes[i], values[i]);
             }
 
             // Assert
@@ -352,306 +352,382 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceData.GetDataForInsertValidClassByEquals), MemberType = typeof(MyListSourceData))]
-        public void Insert_Valid_Class_By_Equals(int[] index, Employee[] value, MyList<Employee> expectedСollection)
+        public void Insert_Valid_Class_By_Equals(int[] indexes, Employee[] values, MyList<Employee> expectedСollection)
         {
             for (int i = 0; i < 100; i++)
             {
                 _collectionClass.Add(new Employee { Name = "Alex", Age = 23 });
             }
 
-            for (int i = 0; i < value.Length; i++)
+            for (int i = 0; i < values.Length; i++)
             {
-                _collectionClass.Insert(index[i], value[i]);
+                _collectionClass.Insert(indexes[i], values[i]);
             }
 
             _collectionClass.Should().Be(expectedСollection);
         }
 
         [Theory]
-        [InlineData(new int[] { 0, 10 }, 2)]
-        public void AddRange_Valid_1(int[] values, int expectedCount)
+        [InlineData(new int[] { 0, 10 }, 2, 10, 1)]
+        [InlineData(new int[] { -1, 2, 0, 4 }, 4, 4, 3)]
+        [InlineData(new int[] { -1, -2, -3, -4, -5, -6, -7 }, 7, -5, 4)]
+        [InlineData(new int[] { 1, 10, 100, 1000 }, 4, 100, 2)]
+        [InlineData(new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 10, 0, 0)]
+        [InlineData(new int[] { -1, 0, 1 }, 3, 1, 2)]
+        public void AddRange_Valid_Int_By_Count_And_Index_1(int[] values, int expectedCount, int expectedValue, int expectedIndex)
         {
             _collectionInt.AddRange(values);
 
             _collectionInt.Count.Should().Be(expectedCount);
+            _collectionInt[expectedIndex].Should().Be(expectedValue);
         }
 
-        [Fact]
-        public void AddRange_Valid_Int()
+        [Theory]
+        [MemberData(nameof(MyListSourceData.GetDataForAddRangeValidIntByCountAndIndex), MemberType = typeof(MyListSourceData))]
+        public void AddRange_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int[] values, int expectedCount, int expectedIndex, int expectedValue)
         {
-            // Arrange
-            var item1 = new int[] { 1, 2, 3, 4 };
-            var item2 = new int[] { 2, 3, 4, 5 };
-            var expected = new MyList<int>();
-            expected.AddRange(new int[] { 1, 2, 3, 4 });
-            expected.AddRange(new int[] { 2, 3, 4, 5 });
-
             // Act
-            var actualMyList = new MyList<int>();
-            actualMyList.AddRange(item1);
-            actualMyList.AddRange(item2);
+            collection.AddRange(values);
 
             // Assert
-            actualMyList.Should().BeEquivalentTo(expected);
+            collection.Count.Should().Be(expectedCount);
+            collection[expectedIndex].Should().Be(expectedValue);
         }
 
-        [Fact]
-        public void AddRange_Valid_String()
+        [Theory]
+        [MemberData(nameof(MyListSourceData.GetDataForAddRangeValidIntByEquals), MemberType = typeof(MyListSourceData))]
+        public void AddRange_Valid_Int_By_Equals(int[,] values, IMyCollection<int> expectedСollection)
         {
-            // Arrange
-            var item1 = new string[] { "Tom", "Alex" };
-            var item2 = new string[] { "Pavlo", "Ivan" };
-            var expected = new MyList<string>();
-            expected.AddRange(new string[] { "Tom", "Alex" });
-            expected.AddRange(new string[] { "Pavlo", "Ivan" });
-
             // Act
-            var actualMyList = new MyList<string>();
-            actualMyList.AddRange(item1);
-            actualMyList.AddRange(item2);
+            var myArray = new int[values.GetLength(1)];
+            for (int i = 0; i < values.GetLength(0); i++)
+            {
+                for (int j = 0; j < values.GetLength(1); j++)
+                {
+                    myArray[j] = values[i, j];
+                }
+
+                _collectionInt.AddRange(myArray);
+            }
 
             // Assert
-            actualMyList.Should().BeEquivalentTo(expected);
+            _collectionInt.Should().Be(expectedСollection);
         }
 
-        [Fact]
-        public void InsertRangeInStart_Valid_Int()
+        [Theory]
+        [InlineData(2, new string[] { "tom", "sem", "bob" }, "bob", 4, new string[] { "tom", "sem", "bob" }, "sem", 6)]
+        [InlineData(1, new string[] { "", "", "" }, "", 6, new string[] { "", "", "", "", "" }, "", 8)]
+        [InlineData(0, new string[] { null, null }, null, 2, new string[] { null, null }, null, 4)]
+        [InlineData(3, new string[] { "1", "2", "3", "4", "5" }, "4", 7, new string[] { "6", "7", "8", "9", "10" }, "8", 10)]
+        [InlineData(4, new string[] { "q", "w", "e", "r", "t", "y" }, "t", 8, new string[] { "a", "s", "d", "f", "g", "h" }, "d", 12)]
+        public void AddRange_Valid_String_By_Count_And_Index(int indexItem1, string[] items1, string expectedItem1, int indexItem2, string[] items2, string expectedItem2, int expectedCount)
         {
-            // Arrange
-            var item1 = new int[] { 1, 2, 3, 4 };
-            var item2 = new int[] { 2, 3, 4, 5 };
-            var expected = new MyList<int>();
-            expected.InsertRangeInStart(new int[] { 1, 2, 3, 4 });
-            expected.InsertRangeInStart(new int[] { 2, 3, 4, 5 });
-
             // Act
-            var actualMyList = new MyList<int>();
-            actualMyList.InsertRangeInStart(item1);
-            actualMyList.InsertRangeInStart(item2);
+            _collectionString.AddRange(items1);
+            _collectionString.AddRange(items2);
 
             // Assert
-            actualMyList.Should().BeEquivalentTo(expected);
+            _collectionString.Count.Should().Be(expectedCount);
+            _collectionString[indexItem1].Should().Be(expectedItem1);
+            _collectionString[indexItem2].Should().Be(expectedItem2);
         }
 
-        [Fact]
-        public void InsertRangeInStart_Valid_String()
+        [Theory]
+        [InlineData(new string[] { "tom", "sem", "bob" }, new string[] { "alex", "sem", "bob" })]
+        [InlineData(new string[] { "", "", "" }, new string[] { "", "", "", "", "" })]
+        [InlineData(new string[] { null, null }, new string[] { null, null })]
+        [InlineData(new string[] { "1", "2", "3", "4", "5" }, new string[] { "6", "7", "8", "9", "10" })]
+        [InlineData(new string[] { "q", "w", "e", "r", "t", "y" }, new string[] { "a", "s", "d", "f", "g", "h" })]
+        public void AddRange_Valid_String_By_Equals(string[] items1, string[] items2)
         {
             // Arrange
-            var item1 = new string[] { "Tom", "Alex" };
-            var item2 = new string[] { "Pavlo", "Ivan" };
-            var expected = new MyList<string>();
-            expected.InsertRangeInStart(new string[] { "Tom", "Alex" });
-            expected.InsertRangeInStart(new string[] { "Pavlo", "Ivan" });
+            var expectedСollection = new MyList<string>();
+            expectedСollection.AddRange(items1);
+            expectedСollection.AddRange(items2);
 
             // Act
-            var actualMyList = new MyList<string>();
-            actualMyList.InsertRangeInStart(item1);
-            actualMyList.InsertRangeInStart(item2);
+            _collectionString.AddRange(items1);
+            _collectionString.AddRange(items2);
 
             // Assert
-            actualMyList.Should().BeEquivalentTo(expected);
+            _collectionString.Should().Be(expectedСollection);
         }
 
-        [Fact]
-        public void InsertRangeInStart_Valid_Double()
+        [Theory]
+        [MemberData(nameof(MyListSourceData.GetDataForAddRangeValidClassByEquals), MemberType = typeof(MyListSourceData))]
+        public void AddRange_Valid_Class_By_Equals(Employee[,] values, MyList<Employee> expectedСollection)
         {
-            // Arrange
-            var item1 = new double[] { 1.1, 1.2, 1.3 };
-            var item2 = new double[] { 5.1, 6.2, 7.3 };
-            var expected = new MyList<double>();
-            expected.InsertRangeInStart(new double[] { 1.1, 1.2, 1.3 });
-            expected.InsertRangeInStart(new double[] { 5.1, 6.2, 7.3 });
+            var myArray = new Employee[values.GetLength(1)];
+            for (int i = 0; i < values.GetLength(0); i++)
+            {
+                for (int j = 0; j < values.GetLength(1); j++)
+                {
+                    myArray[j] = values[i, j];
+                }
 
-            // Act
-            var actualMyList = new MyList<double>();
-            actualMyList.InsertRangeInStart(item1);
-            actualMyList.InsertRangeInStart(item2);
+                _collectionClass.AddRange(myArray);
+            }
 
-            // Assert
-            actualMyList.Should().BeEquivalentTo(expected);
+
+            _collectionClass.Should().Be(expectedСollection);
         }
 
-        [Fact]
-        public void InsertRangeInStart_Invalid_Char()
+        [Theory]
+        [InlineData(new int[] { 0, 10 }, 1, 10, 3)]
+        [InlineData(new int[] { -1, 2, 0, 4 }, 3, 4, 5)]
+        [InlineData(new int[] { -1, -2, -3, -4, -5, -6, -7 }, 4, -5, 8)]
+        [InlineData(new int[] { 1, 10, 100, 1000 }, 2, 100, 5)]
+        [InlineData(new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 0, 0, 11)]
+        [InlineData(new int[] { -1, 0, 1 }, 2, 1, 4)]
+        public void InsertRangeInStart_Valid_Int_By_Count_And_Index_1(int[] value, int expectedIndex, int expectedValue, int expectedCount)
         {
             // Arrange
-            var item1 = new char[] { '1', '2', '3' };
-            var item2 = new char[] { 'q', 'w', 'e' };
-            var expected = new MyList<char>();
-            expected.InsertRangeInStart(new char[] { '1', '2', '3', '4' });
-            expected.InsertRangeInStart(new char[] { 'q', 'w', 'e' });
+            _collectionInt.Add(0);
 
             // Act
-            var actualMyList = new MyList<char>();
-            actualMyList.InsertRangeInStart(item1);
-            actualMyList.InsertRangeInStart(item2);
+            _collectionInt.InsertRangeInStart(value);
 
             // Assert
-            actualMyList.Should().NotBeEquivalentTo(expected);
+            _collectionInt.Count.Should().Be(expectedCount);
+            _collectionInt[expectedIndex].Should().Be(expectedValue);
         }
 
-        [Fact]
-        public void InsertRange_Valid_Int()
+        [Theory]
+        [MemberData(nameof(MyListSourceData.GetDataForInsertRangeInStartValidIntByCountAndIndex), MemberType = typeof(MyListSourceData))]
+        public void InsertRangeInStart_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int[] values, int expectedCount, int expectedIndex, int expectedValue)
         {
-            // Arrange
-            var item1 = new int[] { 1, 2, 3, 4, 5 };
-            int index1 = 3;
-            var item2 = new int[] { 6, 7, 8, 9, 10 };
-            int index2 = 8;
-            var expected = new MyList<int>();
-            expected.Add(1);
-            expected.Add(2);
-            expected.Add(3);
-            expected.Add(4);
-            expected.Add(5);
-            expected.Add(6);
-            expected.Add(7);
-            expected.Add(8);
-            expected.Add(9);
-            expected.Add(10);
-            expected.InsertRange(3, new int[] { 1, 2, 3, 4, 5 });
-            expected.InsertRange(8, new int[] { 6, 7, 8, 9, 10 });
-
             // Act
-            var actualMyList = new MyList<int>();
-            actualMyList.Add(1);
-            actualMyList.Add(2);
-            actualMyList.Add(3);
-            actualMyList.Add(4);
-            actualMyList.Add(5);
-            actualMyList.Add(6);
-            actualMyList.Add(7);
-            actualMyList.Add(8);
-            actualMyList.Add(9);
-            actualMyList.Add(10);
-            actualMyList.InsertRange(index1, item1);
-            actualMyList.InsertRange(index2, item2);
+            collection.InsertRangeInStart(values);
 
             // Assert
-            actualMyList.Should().BeEquivalentTo(expected);
+            collection.Count.Should().Be(expectedCount);
+            collection[expectedIndex].Should().Be(expectedValue);
         }
 
-        [Fact]
-        public void InsertRange_Valid_String()
+        [Theory]
+        [MemberData(nameof(MyListSourceData.GetDataForInsertRangeInStartValidIntByEquals), MemberType = typeof(MyListSourceData))]
+        public void InsertRangeInStart_Valid_Int_By_Equals(int[,] values, IMyCollection<int> expectedСollection)
         {
             // Arrange
-            var item1 = new string[] { "Tom", "Pavlo" };
-            int index1 = 0;
-            var item2 = new string[] { "Ivan", "Igor" };
-            int index2 = 11;
-            var expected = new MyList<string>();
-            expected.Add("Alex");
-            expected.Add("Alex");
-            expected.Add("Alex");
-            expected.Add("Alex");
-            expected.Add("Alex");
-            expected.Add("Alex");
-            expected.Add("Alex");
-            expected.Add("Alex");
-            expected.Add("Alex");
-            expected.Add("Alex");
-            expected.InsertRange(0, new string[] { "Tom", "Pavlo" });
-            expected.InsertRange(11, new string[] { "Ivan", "Igor" });
+            _collectionInt.Add(0);
 
             // Act
-            var actualMyList = new MyList<string>();
-            actualMyList.Add("Alex");
-            actualMyList.Add("Alex");
-            actualMyList.Add("Alex");
-            actualMyList.Add("Alex");
-            actualMyList.Add("Alex");
-            actualMyList.Add("Alex");
-            actualMyList.Add("Alex");
-            actualMyList.Add("Alex");
-            actualMyList.Add("Alex");
-            actualMyList.Add("Alex");
-            actualMyList.InsertRange(index1, item1);
-            actualMyList.InsertRange(index2, item2);
+            var myArray = new int[values.GetLength(1)];
+            for (int i = 0; i < values.GetLength(0); i++)
+            {
+                for (int j = 0; j < values.GetLength(1); j++)
+                {
+                    myArray[j] = values[i, j];
+                }
+
+                _collectionInt.InsertRangeInStart(myArray);
+            }
 
             // Assert
-            actualMyList.Should().BeEquivalentTo(expected);
+            _collectionInt.Should().Be(expectedСollection);
         }
 
-        [Fact]
-        public void InsertRange_Valid_Double()
+        [Theory]
+        [InlineData(5, new string[] { "tom", "sem", "bob" }, "bob", 1, new string[] { "tom", "sem", "bob" }, "sem", 7)]
+        [InlineData(6, new string[] { "", "", "" }, "", 0, new string[] { "", "", "", "", "" }, "", 9)]
+        [InlineData(3, new string[] { null, null }, null, 0, new string[] { null, null }, null, 5)]
+        [InlineData(8, new string[] { "1", "2", "3", "4", "5" }, "4", 2, new string[] { "6", "7", "8", "9", "10" }, "8", 11)]
+        [InlineData(10, new string[] { "q", "w", "e", "r", "t", "y" }, "t", 2, new string[] { "a", "s", "d", "f", "g", "h" }, "d", 13)]
+        public void InsertRangeInStart_Valid_String_By_Count_And_Index(int indexItem1, string[] items1, string expectedItem1, int indexItem2, string[] items2, string expectedItem2, int expectedCount)
         {
             // Arrange
-            var item1 = new double[] { 1.1, 1.2, 1.3, 1.4 };
-            int index1 = 2;
-            var item2 = new double[] { 5.1, 6.2, 7.3, 8.4, 9.5 };
-            int index2 = 5;
-            var expected = new MyList<double>();
-            expected.Add(1.1);
-            expected.Add(1.1);
-            expected.Add(1.1);
-            expected.Add(1.1);
-            expected.Add(1.1);
-            expected.Add(1.1);
-            expected.Add(1.1);
-            expected.Add(1.1);
-            expected.Add(1.1);
-            expected.Add(1.1);
-            expected.InsertRange(2, new double[] { 1.1, 1.2, 1.3, 1.4 });
-            expected.InsertRange(5, new double[] { 5.1, 6.2, 7.3, 8.4, 9.5 });
+            _collectionString.Add("Alex");
 
             // Act
-            var actualMyList = new MyList<double>();
-            actualMyList.Add(1.1);
-            actualMyList.Add(1.1);
-            actualMyList.Add(1.1);
-            actualMyList.Add(1.1);
-            actualMyList.Add(1.1);
-            actualMyList.Add(1.1);
-            actualMyList.Add(1.1);
-            actualMyList.Add(1.1);
-            actualMyList.Add(1.1);
-            actualMyList.Add(1.1);
-            actualMyList.InsertRange(index1, item1);
-            actualMyList.InsertRange(index2, item2);
+            _collectionString.InsertRangeInStart(items1);
+            _collectionString.InsertRangeInStart(items2);
 
             // Assert
-            actualMyList.Should().BeEquivalentTo(expected);
+            _collectionString.Count.Should().Be(expectedCount);
+            _collectionString[indexItem1].Should().Be(expectedItem1);
+            _collectionString[indexItem2].Should().Be(expectedItem2);
         }
 
-        [Fact]
-        public void InsertRange_Invalid_Char()
+        [Theory]
+        [InlineData(new string[] { "tom", "sem", "bob" }, new string[] { "alex", "sem", "bob" })]
+        [InlineData(new string[] { "", "", "" }, new string[] { "", "", "", "", "" })]
+        [InlineData(new string[] { null, null }, new string[] { null, null })]
+        [InlineData(new string[] { "1", "2", "3", "4", "5" }, new string[] { "6", "7", "8", "9", "10" })]
+        [InlineData(new string[] { "q", "w", "e", "r", "t", "y" }, new string[] { "a", "s", "d", "f", "g", "h" })]
+        public void InsertRangeInStart_Valid_String_By_Equals(string[] items1, string[] items2)
         {
             // Arrange
-            var item1 = new char[] { '1', '2', '3' };
-            int index1 = 4;
-            var item2 = new char[] { 'q', 'w', 'e' };
-            int index2 = 4;
-            var expected = new MyList<char>();
-            expected.Add('1');
-            expected.Add('1');
-            expected.Add('1');
-            expected.Add('1');
-            expected.Add('1');
-            expected.Add('1');
-            expected.Add('1');
-            expected.Add('1');
-            expected.Add('1');
-            expected.Add('1');
-            expected.InsertRange(5, new char[] { '1', '2', '3', '4' });
-            expected.InsertRange(6, new char[] { 'a', 's', 'd' });
+            var expectedСollection = new MyList<string>();
+            expectedСollection.Add("Alex");
+            expectedСollection.InsertRangeInStart(items1);
+            expectedСollection.InsertRangeInStart(items2);
+            _collectionString.Add("Alex");
 
             // Act
-            var actualMyList = new MyList<char>();
-            actualMyList.Add('1');
-            actualMyList.Add('1');
-            actualMyList.Add('1');
-            actualMyList.Add('1');
-            actualMyList.Add('1');
-            actualMyList.Add('1');
-            actualMyList.Add('1');
-            actualMyList.Add('1');
-            actualMyList.Add('1');
-            actualMyList.Add('1');
-            actualMyList.InsertRange(index1, item1);
-            actualMyList.InsertRange(index2, item2);
+            _collectionString.InsertRangeInStart(items1);
+            _collectionString.InsertRangeInStart(items2);
 
             // Assert
-            actualMyList.Should().NotBeEquivalentTo(expected);
+            _collectionString.Should().Be(expectedСollection);
+        }
+
+        [Theory]
+        [MemberData(nameof(MyListSourceData.GetDataForInsertRangeInStartValidClassByEquals), MemberType = typeof(MyListSourceData))]
+        public void InsertRangeInStart_Valid_Class_By_Equals(Employee[,] values, MyList<Employee> expectedСollection)
+        {
+            _collectionClass.Add(new Employee { Name = "Alex", Age = 23 });
+
+            var myArray = new Employee[values.GetLength(1)];
+            for (int i = 0; i < values.GetLength(0); i++)
+            {
+                for (int j = 0; j < values.GetLength(1); j++)
+                {
+                    myArray[j] = values[i, j];
+                }
+
+                _collectionClass.InsertRangeInStart(myArray);
+            }
+
+            _collectionClass.Should().Be(expectedСollection);
+        }
+
+        [Theory]
+        [InlineData(new int[] { 0, 10 }, 1, 12, 2, 10)]
+        [InlineData(new int[] { -1, 2, 0, 4 }, 3, 14, 4, 2)]
+        [InlineData(new int[] { -1, -2, -3, -4, -5, -6, -7 }, 5, 17, 9, -5)]
+        [InlineData(new int[] { 1, 10, 100, 1000 }, 6, 14, 9, 1000)]
+        [InlineData(new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 7, 20, 7, 0)]
+        [InlineData(new int[] { -1, 0, 1 }, 9, 13, 11, 1)]
+        public void InsertRange_Valid_Int_By_Count_And_Index_1(int[] value, int index, int expectedCount, int expectedIndex, int expectedValue)
+        {
+            // Arrange
+            for (int i = 0; i < 10; i++)
+            {
+                _collectionInt.Add(i);
+            }
+
+            // Act
+            _collectionInt.InsertRange(index, value);
+
+            // Assert
+            _collectionInt.Count.Should().Be(expectedCount);
+            _collectionInt[expectedIndex].Should().Be(expectedValue);
+        }
+
+        [Theory]
+        [MemberData(nameof(MyListSourceData.GetDataForInsertRangeValidIntByCountAndIndex), MemberType = typeof(MyListSourceData))]
+        public void InsertRange_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int index, int[] value, int expectedCount, int expectedIndex, int expectedValue)
+        {
+            // Act
+            collection.InsertRange(index, value);
+
+            // Assert
+            collection.Count.Should().Be(expectedCount);
+            collection[expectedIndex].Should().Be(expectedValue);
+        }
+
+        [Theory]
+        [MemberData(nameof(MyListSourceData.GetDataForInsertRangeValidIntByEquals), MemberType = typeof(MyListSourceData))]
+        public void InsertRange_Valid_Int_By_Equals(int[] indexes, int[,] values, IMyCollection<int> expectedСollection)
+        {
+            // Arrange
+            for (int i = 0; i < 100; i++)
+            {
+                _collectionInt.Add(i);
+            }
+
+            // Act
+            var myArray = new int[values.GetLength(1)];
+            for (int i = 0; i < values.GetLength(0); i++)
+            {
+                for (int j = 0; j < values.GetLength(1); j++)
+                {
+                    myArray[j] = values[i, j];
+                }
+
+                _collectionInt.InsertRange(indexes[i], myArray);
+            }
+
+            // Assert
+            _collectionInt.Should().Be(expectedСollection);
+        }
+
+        [Theory]
+        [InlineData(2, new string[] { "tom", "sem", "bob" }, 4, "bob", 54, new string[] { "tom", "sem", "bob" }, 55, "sem", 106)]
+        [InlineData(1, new string[] { "", "", "" }, 2, "", 65, new string[] { "", "", "", "", "" }, 67, "", 108)]
+        [InlineData(10, new string[] { null, null }, 11, null, 96, new string[] { null, null }, 96, null, 104)]
+        [InlineData(3, new string[] { "1", "2", "3", "4", "5" }, 6, "4", 89, new string[] { "6", "7", "8", "9", "10" }, 91, "8", 110)]
+        [InlineData(24, new string[] { "q", "w", "e", "r", "t", "y" }, 28, "t", 105, new string[] { "a", "s", "d", "f", "g", "h" }, 107, "d", 112)]
+        public void InsertRange_Valid_String_By_Count_And_Index(int indexItem1, string[] items1, int expectedIndexItem1, string expectedItem1, int indexItem2, string[] items2, int expectedIndexItem2, string expectedItem2, int expectedCount)
+        {
+            // Arrange
+            for (int i = 0; i < 100; i++)
+            {
+                _collectionString.Add("Alex");
+            }
+
+
+            // Act
+            _collectionString.InsertRange(indexItem1, items1);
+            _collectionString.InsertRange(indexItem2, items2);
+
+            // Assert
+            _collectionString.Count.Should().Be(expectedCount);
+            _collectionString[expectedIndexItem1].Should().Be(expectedItem1);
+            _collectionString[expectedIndexItem2].Should().Be(expectedItem2);
+        }
+
+        [Theory]
+        [InlineData(8, new string[] { "tom", "sem", "bob" }, 22, new string[] { "alex", "sem", "bob" })]
+        [InlineData(5, new string[] { "", "", "" }, 55, new string[] { "", "", "", "", "" })]
+        [InlineData(7, new string[] { null, null }, 76, new string[] { null, null })]
+        [InlineData(56, new string[] { "1", "2", "3", "4", "5" }, 90, new string[] { "6", "7", "8", "9", "10" })]
+        [InlineData(43, new string[] { "q", "w", "e", "r", "t", "y" }, 99, new string[] { "a", "s", "d", "f", "g", "h" })]
+        public void InsertRange_Valid_String_By_Equals(int indexItem1, string[] items1, int indexItem2, string[] items2)
+        {
+            // Arrange
+            var expectedСollection = new MyList<string>();
+            for (int i = 0; i < 100; i++)
+            {
+                expectedСollection.Add("Alex");
+            }
+
+            expectedСollection.InsertRange(indexItem1, items1);
+            expectedСollection.InsertRange(indexItem2, items2);
+            for (int i = 0; i < 100; i++)
+            {
+                _collectionString.Add("Alex");
+            }
+
+            // Act
+            _collectionString.InsertRange(indexItem1, items1);
+            _collectionString.InsertRange(indexItem2, items2);
+
+            // Assert
+            _collectionString.Should().Be(expectedСollection);
+        }
+
+        [Theory]
+        [MemberData(nameof(MyListSourceData.GetDataForInsertRangeValidClassByEquals), MemberType = typeof(MyListSourceData))]
+        public void InsertRange_Valid_Class_By_Equals(int[] indexes, Employee[,] values, MyList<Employee> expectedСollection)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                _collectionClass.Add(new Employee { Name = "Alex", Age = 23 });
+            }
+
+            var myArray = new Employee[values.GetLength(1)];
+            for (int i = 0; i < values.GetLength(0); i++)
+            {
+                for (int j = 0; j < values.GetLength(1); j++)
+                {
+                    myArray[j] = values[i, j];
+                }
+
+                _collectionClass.InsertRange(indexes[i], myArray);
+            }
+
+            _collectionClass.Should().Be(expectedСollection);
         }
     }
 }
