@@ -1,6 +1,6 @@
-namespace MyCollectionsExample
+namespace ExampleMyCollections
 {
-    public class ExampleClass:IExampleClass
+    public class ExampleClass : IExampleClass
     {
         public int Sum(int x, int y)
         {

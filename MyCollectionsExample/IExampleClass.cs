@@ -1,4 +1,4 @@
-namespace MyCollectionsExample
+namespace ExampleMyCollections
 {
     public interface IExampleClass
     {
