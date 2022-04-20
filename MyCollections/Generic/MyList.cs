@@ -38,7 +38,33 @@ namespace MyCollections.Generic
 
         public MyList()
         {
+            Count = 0;
             _array = new T[_defaultCapacity];
+        }
+
+        public MyList(T value)
+        {
+            Count = 1;
+            _array = new T[_defaultCapacity];
+            _array[0] = value;
+        }
+
+        public MyList(T[] value)
+        {
+            if (value != null)
+            {
+                Count = value.Length;
+                _array = new T[value.Length + _defaultCapacity];
+                for (int i = 0; i < Count; i++)
+                {
+                    _array[i] = value[i];
+                }
+            }
+            else
+            {
+                Count = 0;
+                _array = new T[_defaultCapacity];
+            }
         }
 
         /// <summary>
@@ -139,6 +165,46 @@ namespace MyCollections.Generic
         public void InsertRangeInStart(T[] array)
         {
             InsertRange(index: 0, array);
+        }
+
+        public void Remove()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveStart()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveAt(int index)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveRange(int count)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveRangeStart(int count)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveRangeAt(int index, int count)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveFirst(T value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int RemoveAll(T value)
+        {
+            throw new NotImplementedException();
         }
 
         public override string ToString()
