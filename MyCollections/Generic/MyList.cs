@@ -169,17 +169,28 @@ namespace MyCollections.Generic
 
         public void Remove()
         {
-            throw new NotImplementedException();
+            var countObj = 1;
+            RemoveCount(countObj);
+            _array = ResizeArray(-countObj);
         }
 
         public void RemoveStart()
         {
-            throw new NotImplementedException();
+            RemoveAt(index: 0);
         }
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            if (ValidateIndex(index, Count))
+            {
+                var countObj = 1;
+                for (int i = index; i < Count; i++)
+                {
+                    _array[i] = _array[i + 1];
+                }
+                RemoveCount(countObj);
+                _array = ResizeArray(-countObj);
+            }
         }
 
         public void RemoveRange(int count)
@@ -269,6 +280,7 @@ namespace MyCollections.Generic
         /// <returns></returns>
         private T[] ResizeArray(int countObjects)
         {
+            //Increase array size
             if (_array.Length <= (Count + countObjects))
             {
                 var tempArray = (T[])_array.Clone();
@@ -281,6 +293,18 @@ namespace MyCollections.Generic
                 var newLength = _array.Length + additionalLength;
                 _array = new T[newLength];
                 for (int i = 0; i < tempArray.Length; i++)
+                {
+                    _array[i] = tempArray[i];
+                }
+            }
+
+            //Decrease array size
+            if (countObjects < 0 && Count * 2 <= _array.Length)
+            {
+                var tempArray = (T[])_array.Clone();
+                var newLength = Count + _defaultCapacity;
+                _array = new T[newLength];
+                for (int i = 0; i < _array.Length; i++)
                 {
                     _array[i] = tempArray[i];
                 }
@@ -299,6 +323,15 @@ namespace MyCollections.Generic
         private void AddCount(int countObjects)
         {
             Count += countObjects;
+        }
+
+        private void RemoveCount(int countObjects)
+        {
+            Count -= countObjects;
+            if (Count < 0)
+            {
+                Count = 0;
+            }
         }
     }
 }

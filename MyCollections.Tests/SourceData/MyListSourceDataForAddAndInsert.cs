@@ -5,7 +5,7 @@ using MyCollections.Tests.ClassForTests;
 
 namespace MyCollections.Tests.SourceData
 {
-    public class MyListSourceData
+    public class MyListSourceDataForAddAndInsert
     {
         public static IEnumerable<object[]> GetDataForAddValidIntByCountAndIndex()
         {

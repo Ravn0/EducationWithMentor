@@ -43,7 +43,7 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceData.GetDataForAddValidIntByCountAndIndex), MemberType = typeof(MyListSourceData))]
+        [MemberData(nameof(MyListSourceDataForAddAndInsert.GetDataForAddValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForAddAndInsert))]
         public void Add_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int value, int expectedCount, int expectedIndex)
         {
             // Act
@@ -55,7 +55,7 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceData.GetDataForAddValidIntByEquals), MemberType = typeof(MyListSourceData))]
+        [MemberData(nameof(MyListSourceDataForAddAndInsert.GetDataForAddValidIntByEquals), MemberType = typeof(MyListSourceDataForAddAndInsert))]
         public void Add_Valid_Int_By_Equals(int[] values, IMyCollection<int> expectedСollection)
         {
             // Act
@@ -113,7 +113,7 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceData.GetDataForAddValidClassByEquals), MemberType = typeof(MyListSourceData))]
+        [MemberData(nameof(MyListSourceDataForAddAndInsert.GetDataForAddValidClassByEquals), MemberType = typeof(MyListSourceDataForAddAndInsert))]
         public void Add_Valid_Class_By_Equals(Employee[] values, MyList<Employee> expectedСollection)
         {
             for (int i = 0; i < values.Length; i++)
@@ -148,7 +148,7 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceData.GetDataForInsertInStartValidIntByCountAndIndex), MemberType = typeof(MyListSourceData))]
+        [MemberData(nameof(MyListSourceDataForAddAndInsert.GetDataForInsertInStartValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForAddAndInsert))]
         public void InsertInStart_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int value, int expectedCount, int expectedIndex)
         {
             // Act
@@ -160,7 +160,7 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceData.GetDataForInsertInStartValidIntByEquals), MemberType = typeof(MyListSourceData))]
+        [MemberData(nameof(MyListSourceDataForAddAndInsert.GetDataForInsertInStartValidIntByEquals), MemberType = typeof(MyListSourceDataForAddAndInsert))]
         public void InsertInStart_Valid_Int_By_Equals(int[] values, IMyCollection<int> expectedСollection)
         {
             // Arrange
@@ -224,7 +224,7 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceData.GetDataForInsertInStartValidClassByEquals), MemberType = typeof(MyListSourceData))]
+        [MemberData(nameof(MyListSourceDataForAddAndInsert.GetDataForInsertInStartValidClassByEquals), MemberType = typeof(MyListSourceDataForAddAndInsert))]
         public void InsertInStart_Valid_Class_By_Equals(Employee[] values, MyList<Employee> expectedСollection)
         {
             _collectionClass.Add(new Employee { Name = "Alex", Age = 23 });
@@ -263,7 +263,7 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceData.GetDataForInsertValidIntByCountAndIndex), MemberType = typeof(MyListSourceData))]
+        [MemberData(nameof(MyListSourceDataForAddAndInsert.GetDataForInsertValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForAddAndInsert))]
         public void Insert_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int index, int value, int expectedCount)
         {
             // Act
@@ -275,7 +275,7 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceData.GetDataForInsertValidIntByEquals), MemberType = typeof(MyListSourceData))]
+        [MemberData(nameof(MyListSourceDataForAddAndInsert.GetDataForInsertValidIntByEquals), MemberType = typeof(MyListSourceDataForAddAndInsert))]
         public void Insert_Valid_Int_By_Equals(int[] indexes, int[] values, IMyCollection<int> expectedСollection)
         {
             // Arrange
@@ -351,7 +351,7 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceData.GetDataForInsertValidClassByEquals), MemberType = typeof(MyListSourceData))]
+        [MemberData(nameof(MyListSourceDataForAddAndInsert.GetDataForInsertValidClassByEquals), MemberType = typeof(MyListSourceDataForAddAndInsert))]
         public void Insert_Valid_Class_By_Equals(int[] indexes, Employee[] values, MyList<Employee> expectedСollection)
         {
             for (int i = 0; i < 100; i++)
@@ -383,7 +383,7 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceData.GetDataForAddRangeValidIntByCountAndIndex), MemberType = typeof(MyListSourceData))]
+        [MemberData(nameof(MyListSourceDataForAddAndInsert.GetDataForAddRangeValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForAddAndInsert))]
         public void AddRange_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int[] values, int expectedCount, int expectedIndex, int expectedValue)
         {
             // Act
@@ -395,7 +395,7 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceData.GetDataForAddRangeValidIntByEquals), MemberType = typeof(MyListSourceData))]
+        [MemberData(nameof(MyListSourceDataForAddAndInsert.GetDataForAddRangeValidIntByEquals), MemberType = typeof(MyListSourceDataForAddAndInsert))]
         public void AddRange_Valid_Int_By_Equals(int[,] values, IMyCollection<int> expectedСollection)
         {
             // Act
@@ -454,7 +454,7 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceData.GetDataForAddRangeValidClassByEquals), MemberType = typeof(MyListSourceData))]
+        [MemberData(nameof(MyListSourceDataForAddAndInsert.GetDataForAddRangeValidClassByEquals), MemberType = typeof(MyListSourceDataForAddAndInsert))]
         public void AddRange_Valid_Class_By_Equals(Employee[,] values, MyList<Employee> expectedСollection)
         {
             var myArray = new Employee[values.GetLength(1)];
@@ -493,7 +493,7 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceData.GetDataForInsertRangeInStartValidIntByCountAndIndex), MemberType = typeof(MyListSourceData))]
+        [MemberData(nameof(MyListSourceDataForAddAndInsert.GetDataForInsertRangeInStartValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForAddAndInsert))]
         public void InsertRangeInStart_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int[] values, int expectedCount, int expectedIndex, int expectedValue)
         {
             // Act
@@ -505,7 +505,7 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceData.GetDataForInsertRangeInStartValidIntByEquals), MemberType = typeof(MyListSourceData))]
+        [MemberData(nameof(MyListSourceDataForAddAndInsert.GetDataForInsertRangeInStartValidIntByEquals), MemberType = typeof(MyListSourceDataForAddAndInsert))]
         public void InsertRangeInStart_Valid_Int_By_Equals(int[,] values, IMyCollection<int> expectedСollection)
         {
             // Arrange
@@ -572,7 +572,7 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceData.GetDataForInsertRangeInStartValidClassByEquals), MemberType = typeof(MyListSourceData))]
+        [MemberData(nameof(MyListSourceDataForAddAndInsert.GetDataForInsertRangeInStartValidClassByEquals), MemberType = typeof(MyListSourceDataForAddAndInsert))]
         public void InsertRangeInStart_Valid_Class_By_Equals(Employee[,] values, MyList<Employee> expectedСollection)
         {
             _collectionClass.Add(new Employee { Name = "Alex", Age = 23 });
@@ -615,7 +615,7 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceData.GetDataForInsertRangeValidIntByCountAndIndex), MemberType = typeof(MyListSourceData))]
+        [MemberData(nameof(MyListSourceDataForAddAndInsert.GetDataForInsertRangeValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForAddAndInsert))]
         public void InsertRange_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int index, int[] value, int expectedCount, int expectedIndex, int expectedValue)
         {
             // Act
@@ -627,7 +627,7 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceData.GetDataForInsertRangeValidIntByEquals), MemberType = typeof(MyListSourceData))]
+        [MemberData(nameof(MyListSourceDataForAddAndInsert.GetDataForInsertRangeValidIntByEquals), MemberType = typeof(MyListSourceDataForAddAndInsert))]
         public void InsertRange_Valid_Int_By_Equals(int[] indexes, int[,] values, IMyCollection<int> expectedСollection)
         {
             // Arrange
@@ -708,7 +708,7 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceData.GetDataForInsertRangeValidClassByEquals), MemberType = typeof(MyListSourceData))]
+        [MemberData(nameof(MyListSourceDataForAddAndInsert.GetDataForInsertRangeValidClassByEquals), MemberType = typeof(MyListSourceDataForAddAndInsert))]
         public void InsertRange_Valid_Class_By_Equals(int[] indexes, Employee[,] values, MyList<Employee> expectedСollection)
         {
             for (int i = 0; i < 100; i++)
