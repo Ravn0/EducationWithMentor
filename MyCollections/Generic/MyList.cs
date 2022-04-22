@@ -188,6 +188,7 @@ namespace MyCollections.Generic
                 {
                     _array[i] = _array[i + 1];
                 }
+
                 RemoveCount(countObj);
                 _array = ResizeArray(-countObj);
             }
@@ -195,17 +196,37 @@ namespace MyCollections.Generic
 
         public void RemoveRange(int count)
         {
-            throw new NotImplementedException();
+            var countObj = count;
+            RemoveCount(countObj);
+            _array = ResizeArray(-countObj);
         }
 
         public void RemoveRangeStart(int count)
         {
-            throw new NotImplementedException();
+            RemoveRangeAt(index: 0, count);
         }
 
         public void RemoveRangeAt(int index, int count)
         {
-            throw new NotImplementedException();
+            if (ValidateIndex(index, Count))
+            {
+                var countObj = count;
+                for (int i = index; i < Count; i++)
+                {
+                    if (i + count <= Count)
+                    {
+                        _array[i] = _array[i + count];
+                    }
+                }
+
+                if (index + count > Count)
+                {
+                    countObj = Count - index;
+                }
+
+                RemoveCount(countObj);
+                _array = ResizeArray(-countObj);
+            }
         }
 
         public void RemoveFirst(T value)
