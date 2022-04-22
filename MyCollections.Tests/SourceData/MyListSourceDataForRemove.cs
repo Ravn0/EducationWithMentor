@@ -975,5 +975,369 @@ namespace MyCollections.Tests.SourceData
                 collection,
             };
         }
+
+        public static IEnumerable<object[]> GetDataForRemoveFirstValidIntByCountAndIndex()
+        {
+            var array = new int[] { 0, 1, 2, 3, 4, 4, 4, 5, 6, 7, 8, 8, 8, 8, 9 };
+            var collection = new MyList<int>(array);
+
+            yield return new object[]
+            {
+                collection,
+                2,
+                2,
+                3,
+                14,
+            };
+            collection = new MyList<int>(array);
+
+            yield return new object[]
+            {
+                collection,
+                4,
+                8,
+                7,
+                14,
+            };
+            collection = new MyList<int>(array);
+
+            yield return new object[]
+            {
+                collection,
+                8,
+                13,
+                9,
+                14,
+            };
+            collection = new MyList<int>(array);
+
+            yield return new object[]
+            {
+                collection,
+                10,
+                13,
+                8,
+                15,
+            };
+        }
+
+        public static IEnumerable<object[]> GetDataForRemoveFirstValidIntByEquals()
+        {
+            var array = new int[] { -2, -2, -1, 0, 0, 1, 2, 3, 4, 5, 6, 7, 7, 7, 7, 8, 9, 9 };
+            var collection = new MyList<int>(array);
+            var value = 1;
+            collection.RemoveFirst(value);
+
+            yield return new object[]
+            {
+                collection,
+                value,
+            };
+            collection = new MyList<int>(array);
+            value = -2;
+            collection.RemoveFirst(value);
+
+            yield return new object[]
+            {
+                collection,
+                value,
+            };
+            collection = new MyList<int>(array);
+            value = 0;
+            collection.RemoveFirst(value);
+
+            yield return new object[]
+            {
+                collection,
+                value,
+            };
+            collection = new MyList<int>(array);
+            value = 5;
+            collection.RemoveFirst(value);
+
+            yield return new object[]
+            {
+                collection,
+                value,
+            };
+            collection = new MyList<int>(array);
+            value = 7;
+            collection.RemoveFirst(value);
+
+            yield return new object[]
+            {
+                collection,
+                value,
+            };
+            collection = new MyList<int>(array);
+            value = 9;
+            collection.RemoveFirst(value);
+
+            yield return new object[]
+            {
+                collection,
+                value,
+            };
+            collection = new MyList<int>(array);
+            value = 50;
+            collection.RemoveFirst(value);
+
+            yield return new object[]
+            {
+                collection,
+                value,
+            };
+        }
+
+        public static IEnumerable<object[]> GetDataForRemoveFirstValidClassByEquals()
+        {
+            var array = new Employee[] {
+            new Employee { Name = "alex", Age = 23 },
+            new Employee { Name = "tom", Age = 10 },
+            new Employee { Name = "tom", Age = 15 },
+            new Employee { Name = "ban", Age = 16 },
+            new Employee { Name = "ban", Age = 16 },
+            new Employee { Name = "sam", Age = 45 },
+            new Employee { Name = "jack", Age = 12 },
+            new Employee { Name = "jack", Age = 12 },
+            new Employee { Name = "jack", Age = 12 },
+            new Employee { Name = "oliver", Age = 24 },};
+
+            var value = new Employee { Name = "alex", Age = 23 };
+            var collection = new MyList<Employee>(array);
+            collection.RemoveFirst(value);
+
+            yield return new object[]
+            {
+                value,
+                collection,
+            };
+            value = new Employee { Name = "ban", Age = 16 };
+            collection = new MyList<Employee>(array);
+            collection.RemoveFirst(value);
+
+            yield return new object[]
+            {
+                value,
+                collection,
+            };
+            value = new Employee { Name = "jack", Age = 12 };
+            collection = new MyList<Employee>(array);
+            collection.RemoveFirst(value);
+
+            yield return new object[]
+            {
+                value,
+                collection,
+            };
+            value = new Employee { Name = "Oliver", Age = 16 };
+            collection = new MyList<Employee>(array);
+            collection.RemoveFirst(value);
+
+            yield return new object[]
+            {
+                value,
+                collection,
+            };
+            value = null;
+            collection = new MyList<Employee>(array);
+            collection.RemoveFirst(value);
+
+            yield return new object[]
+            {
+                value,
+                collection,
+            };
+        }
+
+        public static IEnumerable<object[]> GetDataForRemoveAllValidIntByCountAndIndex()
+        {
+            var array = new int[] { 0, 1, 2, 3, 4, 4, 4, 5, 6, 7, 8, 8, 8, 8, 9, 0, 0, 4, 8, 9, 9 };
+            var collection = new MyList<int>(array);
+
+            yield return new object[]
+            {
+                collection,
+                2,
+                1,
+                2,
+                3,
+                20,
+            };
+            collection = new MyList<int>(array);
+
+            yield return new object[]
+            {
+                collection,
+                0,
+                3,
+                8,
+                7,
+                18,
+            };
+            collection = new MyList<int>(array);
+
+            yield return new object[]
+            {
+                collection,
+                8,
+                5,
+                13,
+                4,
+                16,
+            };
+            collection = new MyList<int>(array);
+
+            yield return new object[]
+            {
+                collection,
+                10,
+                0,
+                13,
+                8,
+                21,
+            };
+        }
+
+        public static IEnumerable<object[]> GetDataForRemoveAllValidIntByEquals()
+        {
+            var array = new int[] { -2, -2, -1, 0, 0, 1, 2, 3, 4, 5, 6, 7, 7, 7, 7, 8, 9, 9, 7, 7, -2, 1, 1, 5 };
+            var collection = new MyList<int>(array);
+            var value = 1;
+            var countRemoves = collection.RemoveAll(value);
+
+            yield return new object[]
+            {
+                collection,
+                value,
+                countRemoves,
+            };
+            collection = new MyList<int>(array);
+            value = -2;
+            countRemoves = collection.RemoveAll(value);
+
+            yield return new object[]
+            {
+                collection,
+                value,
+                countRemoves,
+            };
+            collection = new MyList<int>(array);
+            value = 0;
+            countRemoves = collection.RemoveAll(value);
+
+            yield return new object[]
+            {
+                collection,
+                value,
+                countRemoves,
+            };
+            collection = new MyList<int>(array);
+            value = 5;
+            countRemoves = collection.RemoveAll(value);
+
+            yield return new object[]
+            {
+                collection,
+                value,
+                countRemoves,
+            };
+            collection = new MyList<int>(array);
+            value = 7;
+            countRemoves = collection.RemoveAll(value);
+
+            yield return new object[]
+            {
+                collection,
+                value,
+                countRemoves,
+            };
+            collection = new MyList<int>(array);
+            value = 9;
+            countRemoves = collection.RemoveAll(value);
+
+            yield return new object[]
+            {
+                collection,
+                value,
+                countRemoves,
+            };
+            collection = new MyList<int>(array);
+            value = 50;
+            countRemoves = collection.RemoveAll(value);
+
+            yield return new object[]
+            {
+                collection,
+                value,
+                countRemoves,
+            };
+        }
+
+        public static IEnumerable<object[]> GetDataForRemoveAllValidClassByEquals()
+        {
+            var array = new Employee[] {
+            new Employee { Name = "alex", Age = 23 },
+            new Employee { Name = "tom", Age = 10 },
+            new Employee { Name = "tom", Age = 15 },
+            new Employee { Name = "ban", Age = 16 },
+            new Employee { Name = "ban", Age = 16 },
+            new Employee { Name = "sam", Age = 45 },
+            new Employee { Name = "jack", Age = 12 },
+            new Employee { Name = "jack", Age = 12 },
+            new Employee { Name = "jack", Age = 12 },
+            new Employee { Name = "oliver", Age = 24 },};
+
+            var value = new Employee { Name = "alex", Age = 23 };
+            var collection = new MyList<Employee>(array);
+            var countRemoves = collection.RemoveAll(value);
+
+            yield return new object[]
+            {
+                value,
+                countRemoves,
+                collection,
+            };
+            value = new Employee { Name = "ban", Age = 16 };
+            collection = new MyList<Employee>(array);
+            countRemoves = collection.RemoveAll(value);
+
+            yield return new object[]
+            {
+                value,
+                countRemoves,
+                collection,
+            };
+            value = new Employee { Name = "jack", Age = 12 };
+            collection = new MyList<Employee>(array);
+            countRemoves = collection.RemoveAll(value);
+
+            yield return new object[]
+            {
+                value,
+                countRemoves,
+                collection,
+            };
+            value = new Employee { Name = "Oliver", Age = 16 };
+            collection = new MyList<Employee>(array);
+            countRemoves = collection.RemoveAll(value);
+
+            yield return new object[]
+            {
+                value,
+                countRemoves,
+                collection,
+            };
+            value = null;
+            collection = new MyList<Employee>(array);
+            countRemoves = collection.RemoveAll(value);
+
+            yield return new object[]
+            {
+                value,
+                countRemoves,
+                collection,
+            };
+        }
     }
 }

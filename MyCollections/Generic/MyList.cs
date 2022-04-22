@@ -167,6 +167,9 @@ namespace MyCollections.Generic
             InsertRange(index: 0, array);
         }
 
+        /// <summary>
+        /// Removes the element at the end of the MyList<T>.
+        /// </summary>
         public void Remove()
         {
             var countObj = 1;
@@ -174,11 +177,18 @@ namespace MyCollections.Generic
             _array = ResizeArray(-countObj);
         }
 
+        /// <summary>
+        /// Removes the element at the start of the MyList<T>.
+        /// </summary>
         public void RemoveStart()
         {
             RemoveAt(index: 0);
         }
 
+        /// <summary>
+        /// Removes the element at the specified index of the MyList<T>.
+        /// </summary>
+        /// <param name="index">The zero-based index of the element to remove.</param>
         public void RemoveAt(int index)
         {
             if (ValidateIndex(index, Count))
@@ -194,6 +204,10 @@ namespace MyCollections.Generic
             }
         }
 
+        /// <summary>
+        /// Removes a range of elements at the end of the MyList<T>.
+        /// </summary>
+        /// <param name="count">The number of elements to remove</param>
         public void RemoveRange(int count)
         {
             var countObj = count;
@@ -201,11 +215,20 @@ namespace MyCollections.Generic
             _array = ResizeArray(-countObj);
         }
 
+        /// <summary>
+        /// Removes a range of elements at the start of the MyList<T>.
+        /// </summary>
+        /// <param name="count">The number of elements to remove</param>
         public void RemoveRangeStart(int count)
         {
             RemoveRangeAt(index: 0, count);
         }
 
+        /// <summary>
+        /// Removes a range of elements from the List<T>.
+        /// </summary>
+        /// <param name="index">The zero-based starting index of the range of elements to remove.</param>
+        /// <param name="count">The number of elements to remove.</param>
         public void RemoveRangeAt(int index, int count)
         {
             if (ValidateIndex(index, Count))
@@ -229,14 +252,62 @@ namespace MyCollections.Generic
             }
         }
 
+        /// <summary>
+        /// Removes the first occurrence of a specific object from the MyList<T>.
+        /// </summary>
+        /// <param name="value">The object to remove from the MyList<T>. The value can be null for reference types.</param>
         public void RemoveFirst(T value)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < Count; i++)
+            {
+                if (_array[i] == null && value == null)
+                {
+                    RemoveAt(i);
+                    break;
+                }
+                if (_array[i] == null && value != null)
+                {
+                    continue;
+                }
+                if (_array[i].Equals(value))
+                {
+                    RemoveAt(i);
+                    break;
+                }
+            }
         }
 
+        /// <summary>
+        /// Removes all the elements that match the conditions defined by the specified predicate.
+        /// </summary>
+        /// <param name="value">The object to remove from the MyList<T>. The value can be null for reference types.</param>
+        /// <returns></returns>
         public int RemoveAll(T value)
         {
-            throw new NotImplementedException();
+            var countRemoves = 0;
+            for (int i = 0; i < Count; i++)
+            {
+                if (_array[i] == null && value == null)
+                {
+                    countRemoves++;
+                    continue;
+                }
+                if (_array[i] == null && value != null)
+                {
+                    continue;
+                }
+                if (_array[i].Equals(value))
+                {
+                    countRemoves++;
+                    continue;
+                }
+            }
+
+            for (int i = 0; i < countRemoves; i++)
+            {
+                RemoveFirst(value);
+            }
+            return countRemoves;
         }
 
         public override string ToString()
