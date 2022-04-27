@@ -7,13 +7,13 @@ using MyCollections.Tests.ClassForTests;
 
 namespace MyCollections.Tests.MyList
 {
-    public class MyListRemoveTests
+    public class MyListRemoveRangeTests
     {
         protected IMyCollection<int> _collectionInt;
         protected IMyCollection<string> _collectionString;
         protected IMyCollection<Employee> _collectionClass;
 
-        public MyListRemoveTests()
+        public MyListRemoveRangeTests()
         {
             _collectionInt = new MyList<int>(ArrayInitializationInt());
             _collectionString = new MyList<string>(ArrayInitializationString());
@@ -23,16 +23,13 @@ namespace MyCollections.Tests.MyList
         [Theory]
         [InlineData(0, 10, 10, 100)]
         [InlineData(1, 20, 20, 99)]
-        [InlineData(10, 50, 50, 90)]
+        [InlineData(10, 89, 89, 90)]
         [InlineData(50, 49, 49, 50)]
         [InlineData(99, 0, 0, 1)]
-        public void Remove_Valid_Int_By_Count_And_Index_1(int qtyRemoves, int expectedIndex, int expectedValue, int expectedCount)
+        public void RemoveRange_Valid_Int_By_Count_And_Index_1(int count, int expectedIndex, int expectedValue, int expectedCount)
         {
             // Act
-            for (int i = 0; i < qtyRemoves; i++)
-            {
-                _collectionInt.Remove();
-            }
+            _collectionInt.RemoveRange(count);
 
             // Assert
             _collectionInt.Count.Should().Be(expectedCount);
@@ -40,14 +37,11 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceDataForRemove.GetDataForRemoveValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForRemove))]
-        public void Remove_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int qtyRemoves, int expectedIndex, int expectedValue, int expectedCount)
+        [MemberData(nameof(MyListSourceDataForRemoveRange.GetDataForRemoveRangeValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForRemoveRange))]
+        public void RemoveRange_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int count, int expectedIndex, int expectedValue, int expectedCount)
         {
             // Act
-            for (int i = 0; i < qtyRemoves; i++)
-            {
-                collection.Remove();
-            }
+            collection.RemoveRange(count);
 
             // Assert
             collection.Count.Should().Be(expectedCount);
@@ -55,14 +49,11 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceDataForRemove.GetDataForRemoveValidIntByEquals), MemberType = typeof(MyListSourceDataForRemove))]
-        public void Remove_Valid_Int_By_Equals(IMyCollection<int> expectedСollection, int qtyRemoves)
+        [MemberData(nameof(MyListSourceDataForRemoveRange.GetDataForRemoveRangeValidIntByEquals), MemberType = typeof(MyListSourceDataForRemoveRange))]
+        public void RemoveRange_Valid_Int_By_Equals(IMyCollection<int> expectedСollection, int count)
         {
             // Act
-            for (int i = 0; i < qtyRemoves; i++)
-            {
-                _collectionInt.Remove();
-            }
+            _collectionInt.RemoveRange(count);
 
             // Assert
             _collectionInt.Should().Be(expectedСollection);
@@ -72,16 +63,13 @@ namespace MyCollections.Tests.MyList
         [InlineData(0, 10, "Mason", 40, "Anthony", 100)]
         [InlineData(1, 10, "Mason", 20, "Jack", 99)]
         [InlineData(10, 12, "Ethan", 25, "Joseph", 90)]
-        [InlineData(50, 15, "Logan", 40, "Anthony", 50)]
+        [InlineData(50, 15, "Logan", 49, "Josiah", 50)]
         [InlineData(98, 0, "Liam", 1, "Noah", 2)]
-        public void Remove_Valid_String_By_Count_And_Index(int qtyRemoves, int expectedindexItem1, string expectedItem1,
+        public void RemoveRange_Valid_String_By_Count_And_Index(int count, int expectedindexItem1, string expectedItem1,
             int expectedindexItem2, string expectedItem2, int expectedCount)
         {
             // Act
-            for (int i = 0; i < qtyRemoves; i++)
-            {
-                _collectionString.Remove();
-            }
+            _collectionString.RemoveRange(count);
 
             // Assert
             _collectionString.Count.Should().Be(expectedCount);
@@ -94,35 +82,27 @@ namespace MyCollections.Tests.MyList
         [InlineData(2)]
         [InlineData(20)]
         [InlineData(60)]
+        [InlineData(99)]
         [InlineData(100)]
         [InlineData(150)]
-        public void Remove_Valid_String_By_Equals(int qtyRemoves)
+        public void RemoveRange_Valid_String_By_Equals(int count)
         {
             // Arrange
             var expectedСollection = new MyList<string>(ArrayInitializationString());
-            for (int i = 0; i < qtyRemoves; i++)
-            {
-                expectedСollection.Remove();
-            }
+            expectedСollection.RemoveRange(count);
 
             // Act
-            for (int i = 0; i < qtyRemoves; i++)
-            {
-                _collectionString.Remove();
-            }
+            _collectionString.RemoveRange(count);
 
             // Assert
             _collectionString.Should().Be(expectedСollection);
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceDataForRemove.GetDataForRemoveValidClassByEquals), MemberType = typeof(MyListSourceDataForRemove))]
-        public void Remove_Valid_Class_By_Equals(int qtyRemoves, MyList<Employee> expectedСollection)
+        [MemberData(nameof(MyListSourceDataForRemoveRange.GetDataForRemoveRangeValidClassByEquals), MemberType = typeof(MyListSourceDataForRemoveRange))]
+        public void RemoveRange_Valid_Class_By_Equals(int count, MyList<Employee> expectedСollection)
         {
-            for (int i = 0; i < qtyRemoves; i++)
-            {
-                _collectionClass.Remove();
-            }
+            _collectionClass.RemoveRange(count);
 
             _collectionClass.Should().Be(expectedСollection);
         }

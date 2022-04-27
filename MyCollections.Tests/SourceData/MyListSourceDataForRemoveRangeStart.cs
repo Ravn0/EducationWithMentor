@@ -5,9 +5,9 @@ using MyCollections.Tests.ClassForTests;
 
 namespace MyCollections.Tests.SourceData
 {
-    public class MyListSourceDataForRemove
+    public class MyListSourceDataForRemoveRangeStart
     {
-        public static IEnumerable<object[]> GetDataForRemoveValidIntByCountAndIndex()
+        public static IEnumerable<object[]> GetDataForRemoveRangeStartValidIntByCountAndIndex()
         {
             var array = new int[10];
             var value = 0;
@@ -23,7 +23,7 @@ namespace MyCollections.Tests.SourceData
                 collection,
                 2,
                 7,
-                7,
+                9,
                 8,
             };
             array = new int[100];
@@ -40,7 +40,7 @@ namespace MyCollections.Tests.SourceData
                 collection,
                 50,
                 10,
-                22,
+                122,
                 50,
             };
             array = new int[100];
@@ -55,14 +55,14 @@ namespace MyCollections.Tests.SourceData
             yield return new object[]
             {
                 collection,
-                49,
-                50,
+                99,
                 0,
-                51,
+                49,
+                1,
             };
         }
 
-        public static IEnumerable<object[]> GetDataForRemoveValidIntByEquals()
+        public static IEnumerable<object[]> GetDataForRemoveRangeStartValidIntByEquals()
         {
             var array = new int[100];
             for (int i = 0; i < array.Length; i++)
@@ -71,44 +71,53 @@ namespace MyCollections.Tests.SourceData
             }
 
             var collection = new MyList<int>(array);
-            var qtyRemoves = 1;
-            for (int i = 0; i < qtyRemoves; i++)
-            {
-                collection.Remove();
-            }
+            var count = 1;
+            collection.RemoveRangeStart(count);
 
             yield return new object[]
             {
                 collection,
-                qtyRemoves,
+                count,
             };
             collection = new MyList<int>(array);
-            qtyRemoves = 10;
-            for (int i = 0; i < qtyRemoves; i++)
-            {
-                collection.Remove();
-            }
+            count = 10;
+            collection.RemoveRangeStart(count);
 
             yield return new object[]
             {
                 collection,
-                qtyRemoves,
+                count,
             };
             collection = new MyList<int>(array);
-            qtyRemoves = 90;
-            for (int i = 0; i < qtyRemoves; i++)
-            {
-                collection.Remove();
-            }
+            count = 50;
+            collection.RemoveRangeStart(count);
 
             yield return new object[]
             {
                 collection,
-                qtyRemoves,
+                count,
+            };
+            collection = new MyList<int>(array);
+            count = 100;
+            collection.RemoveRangeStart(count);
+
+            yield return new object[]
+            {
+                collection,
+                count,
+            };
+            collection = new MyList<int>(array);
+            count = 300;
+            collection.RemoveRangeStart(count);
+
+            yield return new object[]
+            {
+                collection,
+                count,
             };
         }
 
-        public static IEnumerable<object[]> GetDataForRemoveValidClassByEquals()
+        public static IEnumerable<object[]> GetDataForRemoveRangeStartValidClassByEquals()
         {
             var array = new Employee[100];
             for (int i = 0; i < array.Length; i++)
@@ -116,52 +125,40 @@ namespace MyCollections.Tests.SourceData
                 array[i] = new Employee { Name = ((Names)i).ToString(), Age = i };
             }
 
-            var qtyRemoves = 1;
+            var count = 7;
             var collection = new MyList<Employee>(array);
-            for (int i = 0; i < qtyRemoves; i++)
-            {
-                collection.Remove();
-            }
+            collection.RemoveRangeStart(count);
 
             yield return new object[]
             {
-                qtyRemoves,
+                count,
                 collection,
             };
-            qtyRemoves = 10;
+            count = 61;
             collection = new MyList<Employee>(array);
-            for (int i = 0; i < qtyRemoves; i++)
-            {
-                collection.Remove();
-            }
+            collection.RemoveRangeStart(count);
 
             yield return new object[]
             {
-                qtyRemoves,
+                count,
                 collection,
             };
-            qtyRemoves = 50;
+            count = 100;
             collection = new MyList<Employee>(array);
-            for (int i = 0; i < qtyRemoves; i++)
-            {
-                collection.Remove();
-            }
+            collection.RemoveRangeStart(count);
 
             yield return new object[]
             {
-                qtyRemoves,
+                count,
                 collection,
             };
-            qtyRemoves = 99;
+            count = 200;
             collection = new MyList<Employee>(array);
-            for (int i = 0; i < qtyRemoves; i++)
-            {
-                collection.Remove();
-            }
+            collection.RemoveRangeStart(count);
 
             yield return new object[]
             {
-                qtyRemoves,
+                count,
                 collection,
             };
         }

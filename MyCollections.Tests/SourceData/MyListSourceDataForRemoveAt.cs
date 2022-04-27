@@ -5,9 +5,9 @@ using MyCollections.Tests.ClassForTests;
 
 namespace MyCollections.Tests.SourceData
 {
-    public class MyListSourceDataForRemove
+    public class MyListSourceDataForRemoveAt
     {
-        public static IEnumerable<object[]> GetDataForRemoveValidIntByCountAndIndex()
+        public static IEnumerable<object[]> GetDataForRemoveAtValidIntByCountAndIndex()
         {
             var array = new int[10];
             var value = 0;
@@ -23,8 +23,8 @@ namespace MyCollections.Tests.SourceData
                 collection,
                 2,
                 7,
-                7,
                 8,
+                9,
             };
             array = new int[100];
             value = 0;
@@ -41,7 +41,7 @@ namespace MyCollections.Tests.SourceData
                 50,
                 10,
                 22,
-                50,
+                99,
             };
             array = new int[100];
             value = -50;
@@ -55,14 +55,14 @@ namespace MyCollections.Tests.SourceData
             yield return new object[]
             {
                 collection,
-                49,
-                50,
+                99,
                 0,
-                51,
+                -50,
+                99,
             };
         }
 
-        public static IEnumerable<object[]> GetDataForRemoveValidIntByEquals()
+        public static IEnumerable<object[]> GetDataForRemoveAtValidIntByEquals()
         {
             var array = new int[100];
             for (int i = 0; i < array.Length; i++)
@@ -71,44 +71,44 @@ namespace MyCollections.Tests.SourceData
             }
 
             var collection = new MyList<int>(array);
-            var qtyRemoves = 1;
-            for (int i = 0; i < qtyRemoves; i++)
-            {
-                collection.Remove();
-            }
+            var index = 1;
+            collection.RemoveAt(index);
 
             yield return new object[]
             {
                 collection,
-                qtyRemoves,
+                index,
             };
             collection = new MyList<int>(array);
-            qtyRemoves = 10;
-            for (int i = 0; i < qtyRemoves; i++)
-            {
-                collection.Remove();
-            }
+            index = 10;
+            collection.RemoveAt(index);
 
             yield return new object[]
             {
                 collection,
-                qtyRemoves,
+                index,
             };
             collection = new MyList<int>(array);
-            qtyRemoves = 90;
-            for (int i = 0; i < qtyRemoves; i++)
-            {
-                collection.Remove();
-            }
+            index = 50;
+            collection.RemoveAt(index);
 
             yield return new object[]
             {
                 collection,
-                qtyRemoves,
+                index,
+            };
+            collection = new MyList<int>(array);
+            index = 99;
+            collection.RemoveAt(index);
+
+            yield return new object[]
+            {
+                collection,
+                index,
             };
         }
 
-        public static IEnumerable<object[]> GetDataForRemoveValidClassByEquals()
+        public static IEnumerable<object[]> GetDataForRemoveAtValidClassByEquals()
         {
             var array = new Employee[100];
             for (int i = 0; i < array.Length; i++)
@@ -116,52 +116,52 @@ namespace MyCollections.Tests.SourceData
                 array[i] = new Employee { Name = ((Names)i).ToString(), Age = i };
             }
 
-            var qtyRemoves = 1;
+            var indexes = new int[] { 5, 6, 9, 7 };
             var collection = new MyList<Employee>(array);
-            for (int i = 0; i < qtyRemoves; i++)
+            for (int i = 0; i < indexes.Length; i++)
             {
-                collection.Remove();
+                collection.RemoveAt(indexes[i]);
             }
 
             yield return new object[]
             {
-                qtyRemoves,
+                indexes,
                 collection,
             };
-            qtyRemoves = 10;
+            indexes = new int[] { 8, 1, 5, 7, 21, 58, 61 };
             collection = new MyList<Employee>(array);
-            for (int i = 0; i < qtyRemoves; i++)
+            for (int i = 0; i < indexes.Length; i++)
             {
-                collection.Remove();
+                collection.RemoveAt(indexes[i]);
             }
 
             yield return new object[]
             {
-                qtyRemoves,
+                indexes,
                 collection,
             };
-            qtyRemoves = 50;
+            indexes = new int[] { 51, 1, 24, 68, 92, 54, 74, 12 };
             collection = new MyList<Employee>(array);
-            for (int i = 0; i < qtyRemoves; i++)
+            for (int i = 0; i < indexes.Length; i++)
             {
-                collection.Remove();
+                collection.RemoveAt(indexes[i]);
             }
 
             yield return new object[]
             {
-                qtyRemoves,
+                indexes,
                 collection,
             };
-            qtyRemoves = 99;
+            indexes = new int[] { 99, 98, 97, 96, 0, 4, 5, 1, 8, 10, 14 };
             collection = new MyList<Employee>(array);
-            for (int i = 0; i < qtyRemoves; i++)
+            for (int i = 0; i < indexes.Length; i++)
             {
-                collection.Remove();
+                collection.RemoveAt(indexes[i]);
             }
 
             yield return new object[]
             {
-                qtyRemoves,
+                indexes,
                 collection,
             };
         }

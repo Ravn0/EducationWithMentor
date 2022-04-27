@@ -5,9 +5,9 @@ using MyCollections.Tests.ClassForTests;
 
 namespace MyCollections.Tests.SourceData
 {
-    public class MyListSourceDataForRemove
+    public class MyListSourceDataForRemoveStart
     {
-        public static IEnumerable<object[]> GetDataForRemoveValidIntByCountAndIndex()
+        public static IEnumerable<object[]> GetDataForRemoveStartValidIntByCountAndIndex()
         {
             var array = new int[10];
             var value = 0;
@@ -23,7 +23,7 @@ namespace MyCollections.Tests.SourceData
                 collection,
                 2,
                 7,
-                7,
+                9,
                 8,
             };
             array = new int[100];
@@ -39,8 +39,8 @@ namespace MyCollections.Tests.SourceData
             {
                 collection,
                 50,
-                10,
-                22,
+                9,
+                120,
                 50,
             };
             array = new int[100];
@@ -55,14 +55,14 @@ namespace MyCollections.Tests.SourceData
             yield return new object[]
             {
                 collection,
-                49,
-                50,
+                99,
                 0,
-                51,
+                49,
+                1,
             };
         }
 
-        public static IEnumerable<object[]> GetDataForRemoveValidIntByEquals()
+        public static IEnumerable<object[]> GetDataForRemoveStartValidIntByEquals()
         {
             var array = new int[100];
             for (int i = 0; i < array.Length; i++)
@@ -74,7 +74,7 @@ namespace MyCollections.Tests.SourceData
             var qtyRemoves = 1;
             for (int i = 0; i < qtyRemoves; i++)
             {
-                collection.Remove();
+                collection.RemoveStart();
             }
 
             yield return new object[]
@@ -86,7 +86,7 @@ namespace MyCollections.Tests.SourceData
             qtyRemoves = 10;
             for (int i = 0; i < qtyRemoves; i++)
             {
-                collection.Remove();
+                collection.RemoveStart();
             }
 
             yield return new object[]
@@ -98,7 +98,19 @@ namespace MyCollections.Tests.SourceData
             qtyRemoves = 90;
             for (int i = 0; i < qtyRemoves; i++)
             {
-                collection.Remove();
+                collection.RemoveStart();
+            }
+
+            yield return new object[]
+            {
+                collection,
+                qtyRemoves,
+            };
+            collection = new MyList<int>(array);
+            qtyRemoves = 100;
+            for (int i = 0; i < qtyRemoves; i++)
+            {
+                collection.RemoveStart();
             }
 
             yield return new object[]
@@ -108,7 +120,7 @@ namespace MyCollections.Tests.SourceData
             };
         }
 
-        public static IEnumerable<object[]> GetDataForRemoveValidClassByEquals()
+        public static IEnumerable<object[]> GetDataForRemoveStartValidClassByEquals()
         {
             var array = new Employee[100];
             for (int i = 0; i < array.Length; i++)
@@ -120,7 +132,7 @@ namespace MyCollections.Tests.SourceData
             var collection = new MyList<Employee>(array);
             for (int i = 0; i < qtyRemoves; i++)
             {
-                collection.Remove();
+                collection.RemoveStart();
             }
 
             yield return new object[]
@@ -132,7 +144,7 @@ namespace MyCollections.Tests.SourceData
             collection = new MyList<Employee>(array);
             for (int i = 0; i < qtyRemoves; i++)
             {
-                collection.Remove();
+                collection.RemoveStart();
             }
 
             yield return new object[]
@@ -144,7 +156,7 @@ namespace MyCollections.Tests.SourceData
             collection = new MyList<Employee>(array);
             for (int i = 0; i < qtyRemoves; i++)
             {
-                collection.Remove();
+                collection.RemoveStart();
             }
 
             yield return new object[]
@@ -156,7 +168,7 @@ namespace MyCollections.Tests.SourceData
             collection = new MyList<Employee>(array);
             for (int i = 0; i < qtyRemoves; i++)
             {
-                collection.Remove();
+                collection.RemoveStart();
             }
 
             yield return new object[]
