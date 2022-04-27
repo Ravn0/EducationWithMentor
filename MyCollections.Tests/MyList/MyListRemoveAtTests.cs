@@ -37,6 +37,22 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
+        [InlineData(0, 10, 11, 99)]
+        [InlineData(1, 20, 21, 99)]
+        [InlineData(10, 50, 51, 99)]
+        [InlineData(50, 1, 1, 99)]
+        [InlineData(99, 50, 50, 99)]
+        public void RemoveAt_Invalid_Int(int index, int expectedIndex, int expectedValue, int expectedCount)
+        {
+            // Act
+            _collectionInt.RemoveAt(index);
+
+            // Assert
+            _collectionInt.Count.Should().Be(expectedCount);
+            _collectionInt[expectedIndex].Should().Be(expectedValue);
+        }
+
+        [Theory]
         [MemberData(nameof(MyListSourceDataForRemoveAt.GetDataForRemoveAtValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForRemoveAt))]
         public void RemoveAt_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int index, int expectedIndex, int expectedValue, int expectedCount)
         {

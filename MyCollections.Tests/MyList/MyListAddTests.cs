@@ -77,8 +77,8 @@ namespace MyCollections.Tests.MyList
         public void Add_Valid_String_By_Count_And_Index(string item1, string item2)
         {
             // Arrange
-            var expectedindexItem1 = 0;
-            var expectedindexItem2 = 1;
+            var expectedIndexItem1 = 0;
+            var expectedIndexItem2 = 1;
             var expectedCount = 2;
 
             // Act
@@ -87,8 +87,8 @@ namespace MyCollections.Tests.MyList
 
             // Assert
             _collectionString.Count.Should().Be(expectedCount);
-            _collectionString[expectedindexItem1].Should().Be(item1);
-            _collectionString[expectedindexItem2].Should().Be(item2);
+            _collectionString[expectedIndexItem1].Should().Be(item1);
+            _collectionString[expectedIndexItem2].Should().Be(item2);
         }
 
         [Theory]
