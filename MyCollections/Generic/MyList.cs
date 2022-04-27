@@ -74,7 +74,7 @@ namespace MyCollections.Generic
         public void Add(T item)
         {
             var countObj = 1;
-            _array = ResizeArray(countObj);
+            _array = UpResizeArray(countObj);
 
             _array[Count] = item;
             AddCount(countObj);
@@ -90,7 +90,7 @@ namespace MyCollections.Generic
             if (ValidateIndex(index, Count))
             {
                 var countObj = 1;
-                _array = ResizeArray(countObj);
+                _array = UpResizeArray(countObj);
                 for (int i = Count; i > index; i--)
                 {
                     _array[i] = _array[i - 1];
@@ -102,6 +102,10 @@ namespace MyCollections.Generic
                         break;
                     }
                 }
+            }
+            else
+            {
+                throw new IndexOutOfRangeException($"Index: {index}, Count objects in collection: {Count}");
             }
         }
 
@@ -121,7 +125,7 @@ namespace MyCollections.Generic
         public void AddRange(T[] array)
         {
             var countObj = array.Length;
-            _array = ResizeArray(countObj);
+            _array = UpResizeArray(countObj);
 
             for (int i = 0; i < array.Length; i++)
             {
@@ -141,7 +145,7 @@ namespace MyCollections.Generic
             if (ValidateIndex(index, Count))
             {
                 var countObj = array.Length;
-                _array = ResizeArray(countObj);
+                _array = UpResizeArray(countObj);
                 var actualIndex = Count + array.Length - 1;
 
                 for (int i = Count - 1; i >= index && actualIndex >= index + array.Length; i--)
@@ -155,6 +159,10 @@ namespace MyCollections.Generic
                 }
 
                 AddCount(countObj);
+            }
+            else
+            {
+                throw new IndexOutOfRangeException($"Index: {index}, Count objects in collection: {Count}");
             }
         }
 
@@ -174,7 +182,7 @@ namespace MyCollections.Generic
         {
             var countObj = 1;
             RemoveCount(countObj);
-            _array = ResizeArray(-countObj);
+            _array = DownResizeArray();
         }
 
         /// <summary>
@@ -200,7 +208,11 @@ namespace MyCollections.Generic
                 }
 
                 RemoveCount(countObj);
-                _array = ResizeArray(-countObj);
+                _array = DownResizeArray();
+            }
+            else
+            {
+                throw new IndexOutOfRangeException($"Index: {index}, Count objects in collection: {Count}");
             }
         }
 
@@ -210,9 +222,8 @@ namespace MyCollections.Generic
         /// <param name="count">The number of elements to remove</param>
         public void RemoveRange(int count)
         {
-            var countObj = count;
-            RemoveCount(countObj);
-            _array = ResizeArray(-countObj);
+            RemoveCount(count);
+            _array = DownResizeArray();
         }
 
         /// <summary>
@@ -248,7 +259,11 @@ namespace MyCollections.Generic
                 }
 
                 RemoveCount(countObj);
-                _array = ResizeArray(-countObj);
+                _array = DownResizeArray();
+            }
+            else
+            {
+                throw new IndexOutOfRangeException($"Index: {index}, Count objects in collection: {Count}");
             }
         }
 
@@ -290,23 +305,25 @@ namespace MyCollections.Generic
                 if (_array[i] == null && value == null)
                 {
                     countRemoves++;
+                    RemoveAt(i);
+                    i--;
                     continue;
                 }
+
                 if (_array[i] == null && value != null)
                 {
                     continue;
                 }
+
                 if (_array[i].Equals(value))
                 {
                     countRemoves++;
+                    RemoveAt(i);
+                    i--;
                     continue;
                 }
             }
 
-            for (int i = 0; i < countRemoves; i++)
-            {
-                RemoveFirst(value);
-            }
             return countRemoves;
         }
 
@@ -366,13 +383,12 @@ namespace MyCollections.Generic
         }
 
         /// <summary>
-        /// Change the number of elements in an array while keeping the contents
+        /// Change the number of elements in an array to more while keeping the contents
         /// </summary>
         /// <param name="countObjects">The number of objects to insert into the array</param>
         /// <returns></returns>
-        private T[] ResizeArray(int countObjects)
+        private T[] UpResizeArray(int countObjects)
         {
-            //Increase array size
             if (_array.Length <= (Count + countObjects))
             {
                 var tempArray = (T[])_array.Clone();
@@ -390,8 +406,16 @@ namespace MyCollections.Generic
                 }
             }
 
-            //Decrease array size
-            if (countObjects < 0 && Count * 2 <= _array.Length)
+            return _array;
+        }
+
+        /// <summary>
+        /// Change the number of elements in an array to less, keeping the contents
+        /// </summary>
+        /// <returns></returns>
+        private T[] DownResizeArray()
+        {
+            if (Count * 2 <= _array.Length)
             {
                 var tempArray = (T[])_array.Clone();
                 var newLength = Count + _defaultCapacity;
