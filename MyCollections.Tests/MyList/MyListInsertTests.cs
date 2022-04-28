@@ -28,7 +28,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(100, 5)]
         [InlineData(1000, 6)]
         [InlineData(10000, 7)]
-        public void Insert_Valid_Int_By_Count_And_Index_1(int value, int index)
+        public void Insert_Valid_IntByCountAndIndex1(int value, int index)
         {
             // Arrange
             var expectedCount = 11;
@@ -47,7 +47,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForInsert.GetDataForInsertValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForInsert))]
-        public void Insert_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int index, int value, int expectedCount)
+        public void Insert_Valid_IntByCountAndIndex2(IMyCollection<int> collection, int index, int value, int expectedCount)
         {
             // Act
             collection.Insert(index, value);
@@ -59,7 +59,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForInsert.GetDataForInsertValidIntByEquals), MemberType = typeof(MyListSourceDataForInsert))]
-        public void Insert_Valid_Int_By_Equals(int[] indexes, int[] values, IMyCollection<int> expectedСollection)
+        public void Insert_Valid_IntByEquals(int[] indexes, int[] values, IMyCollection<int> expectedСollection)
         {
             // Arrange
             for (int i = 0; i < 100; i++)
@@ -78,12 +78,25 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
+        [InlineData(10, 10)]
+        [InlineData(102, 20)]
+        [InlineData(1000, 30)]
+        public void Insert_Invalid_Int(int index, int value)
+        {
+            // Act
+            Action act = () => _collectionInt.Insert(index, value);
+
+            // Assert
+            act.Should().Throw<IndexOutOfRangeException>();
+        }
+
+        [Theory]
         [InlineData(8, "tom", 34, "sem")]
         [InlineData(11, "", 65, "")]
         [InlineData(12, null, 17, null)]
         [InlineData(48, "1", 87, "2")]
         [InlineData(56, "s", 59, "a")]
-        public void Insert_Valid_String_By_Count_And_Index(int indexItem1, string item1, int indexItem2, string item2)
+        public void Insert_Valid_StringByCountAndIndex(int indexItem1, string item1, int indexItem2, string item2)
         {
             // Arrange
             var expectedCount = 102;
@@ -109,7 +122,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(12, null, 1, null)]
         [InlineData(48, "1", 87, "2")]
         [InlineData(56, "s", 13, "a")]
-        public void Insert_Valid_String_By_Equals(int indexItem1, string item1, int indexItem2, string item2)
+        public void Insert_Valid_StringByEquals(int indexItem1, string item1, int indexItem2, string item2)
         {
             // Arrange
             var expectedСollection = new MyList<string>();
@@ -135,7 +148,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForInsert.GetDataForInsertValidClassByEquals), MemberType = typeof(MyListSourceDataForInsert))]
-        public void Insert_Valid_Class_By_Equals(int[] indexes, Employee[] values, MyList<Employee> expectedСollection)
+        public void Insert_Valid_ClassByEquals(int[] indexes, Employee[] values, MyList<Employee> expectedСollection)
         {
             for (int i = 0; i < 100; i++)
             {

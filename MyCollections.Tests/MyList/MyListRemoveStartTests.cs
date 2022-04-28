@@ -26,7 +26,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(10, 50, 60, 90)]
         [InlineData(50, 49, 99, 50)]
         [InlineData(99, 0, 99, 1)]
-        public void RemoveStart_Valid_Int_By_Count_And_Index_1(int qtyRemoves, int expectedIndex, int expectedValue, int expectedCount)
+        public void RemoveStart_Valid_IntByCountAndIndex1(int qtyRemoves, int expectedIndex, int expectedValue, int expectedCount)
         {
             // Act
             for (int i = 0; i < qtyRemoves; i++)
@@ -41,7 +41,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemoveStart.GetDataForRemoveStartValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForRemoveStart))]
-        public void RemoveStart_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int qtyRemoves, int expectedIndex, int expectedValue, int expectedCount)
+        public void RemoveStart_Valid_IntByCountAndIndex2(IMyCollection<int> collection, int qtyRemoves, int expectedIndex, int expectedValue, int expectedCount)
         {
             // Act
             for (int i = 0; i < qtyRemoves; i++)
@@ -56,7 +56,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemoveStart.GetDataForRemoveStartValidIntByEquals), MemberType = typeof(MyListSourceDataForRemoveStart))]
-        public void RemoveStart_Valid_Int_By_Equals(IMyCollection<int> expectedСollection, int qtyRemoves)
+        public void RemoveStart_Valid_IntByEquals(IMyCollection<int> expectedСollection, int qtyRemoves)
         {
             // Act
             for (int i = 0; i < qtyRemoves; i++)
@@ -74,7 +74,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(10, 12, "Theodore", 25, "Leo", 90)]
         [InlineData(50, 15, "Colton", 40, "Brooks", 50)]
         [InlineData(98, 0, "Kayden", 1, "Silas", 2)]
-        public void RemoveStart_Valid_String_By_Count_And_Index(int qtyRemoves, int expectedindexItem1, string expectedItem1,
+        public void RemoveStart_Valid_StringByCountAndIndex(int qtyRemoves, int expectedindexItem1, string expectedItem1,
             int expectedindexItem2, string expectedItem2, int expectedCount)
         {
             // Act
@@ -95,7 +95,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(20)]
         [InlineData(60)]
         [InlineData(100)]
-        public void RemoveStart_Valid_String_By_Equals(int qtyRemoves)
+        public void RemoveStart_Valid_StringByEquals(int qtyRemoves)
         {
             // Arrange
             var expectedСollection = new MyList<string>(ArrayInitializationString());
@@ -116,7 +116,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemoveStart.GetDataForRemoveStartValidClassByEquals), MemberType = typeof(MyListSourceDataForRemoveStart))]
-        public void RemoveStart_Valid_Class_By_Equals(int qtyRemoves, MyList<Employee> expectedСollection)
+        public void RemoveStart_Valid_ClassByEquals(int qtyRemoves, MyList<Employee> expectedСollection)
         {
             for (int i = 0; i < qtyRemoves; i++)
             {

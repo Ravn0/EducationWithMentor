@@ -26,7 +26,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(7, 4, 8, 8, 13)]
         [InlineData(9, 2, 13, 0, 15)]
         [InlineData(99, 0, 0, 0, 17)]
-        public void RemoveAll_Valid_Int_By_Count_And_Index_1(int value, int expectedCountRemoves, int expectedIndex, int expectedValue, int expectedCount)
+        public void RemoveAll_Valid_IntByCountAndIndex1(int value, int expectedCountRemoves, int expectedIndex, int expectedValue, int expectedCount)
         {
             // Arrange
             _collectionInt = new MyList<int>(new int[] { 0, 0, 1, 2, 3, 4, 5, 6, 7, 7, 7, 7, 8, 9, 9, 0, 0 });
@@ -42,7 +42,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemoveAll.GetDataForRemoveAllValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForRemoveAll))]
-        public void RemoveAll_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int value, int expectedCountRemoves,
+        public void RemoveAll_Valid_IntByCountAndIndex2(IMyCollection<int> collection, int value, int expectedCountRemoves,
             int expectedIndex, int expectedValue, int expectedCount)
         {
             // Act
@@ -56,7 +56,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemoveAll.GetDataForRemoveAllValidIntByEquals), MemberType = typeof(MyListSourceDataForRemoveAll))]
-        public void RemoveAll_Valid_Int_By_Equals(IMyCollection<int> expectedСollection, int value, int expectedCountRemoves)
+        public void RemoveAll_Valid_IntByEquals(IMyCollection<int> expectedСollection, int value, int expectedCountRemoves)
         {
             // Arrange
             _collectionInt = new MyList<int>(new int[] { -2, -2, -1, 0, 0, 1, 2, 3, 4, 5, 6, 7, 7, 7, 7, 8, 9, 9, 7, 7, -2, 1, 1, 5 });
@@ -76,7 +76,7 @@ namespace MyCollections.Tests.MyList
         [InlineData("sam", 3, 1, "tom", 5, "oliver", 9)]
         [InlineData("Liam", 0, 0, "alex", 9, "jack", 12)]
         [InlineData(null, 2, 0, "alex", 9, "jack", 10)]
-        public void RemoveAll_Valid_String_By_Count_And_Index(string value, int expectedCountRemoves, int expectedindexItem1, string expectedItem1,
+        public void RemoveAll_Valid_StringByCountAndIndex(string value, int expectedCountRemoves, int expectedindexItem1, string expectedItem1,
             int expectedindexItem2, string expectedItem2, int expectedCount)
         {
             // Arrange
@@ -100,7 +100,7 @@ namespace MyCollections.Tests.MyList
         [InlineData("jack", 1)]
         [InlineData("Liam", 0)]
         [InlineData(null, 2)]
-        public void RemoveAll_Valid_String_By_Equals(string value, int expectedCountRemoves)
+        public void RemoveAll_Valid_StringByEquals(string value, int expectedCountRemoves)
         {
             // Arrange
             var expectedСollection = new MyList<string>(new string[] { "alex", "tom", "tom", "ban", "igor", "sam", "sam", "sam", "oliver", "jack", null, null });
@@ -117,7 +117,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemoveAll.GetDataForRemoveAllValidClassByEquals), MemberType = typeof(MyListSourceDataForRemoveAll))]
-        public void RemoveAll_Valid_Class_By_Equals(Employee value, int expectedCountRemoves, MyList<Employee> expectedСollection)
+        public void RemoveAll_Valid_ClassByEquals(Employee value, int expectedCountRemoves, MyList<Employee> expectedСollection)
         {
             _collectionClass = new MyList<Employee>(new Employee[] {
             new Employee { Name = "alex", Age = 23 },

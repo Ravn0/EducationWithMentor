@@ -28,7 +28,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(100)]
         [InlineData(1000)]
         [InlineData(10000)]
-        public void InsertInStart_Valid_Int_By_Count_And_Index_1(int value)
+        public void InsertInStart_Valid_IntByCountAndIndex1(int value)
         {
             // Arrange
             var expectedIndex = 0;
@@ -45,7 +45,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForInsertInStart.GetDataForInsertInStartValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForInsertInStart))]
-        public void InsertInStart_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int value, int expectedCount, int expectedIndex)
+        public void InsertInStart_Valid_IntByCountAndIndex2(IMyCollection<int> collection, int value, int expectedCount, int expectedIndex)
         {
             // Act
             collection.InsertInStart(value);
@@ -57,7 +57,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForInsertInStart.GetDataForInsertInStartValidIntByEquals), MemberType = typeof(MyListSourceDataForInsertInStart))]
-        public void InsertInStart_Valid_Int_By_Equals(int[] values, IMyCollection<int> expectedСollection)
+        public void InsertInStart_Valid_IntByEquals(int[] values, IMyCollection<int> expectedСollection)
         {
             // Arrange
             _collectionInt.Add(0);
@@ -78,7 +78,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(null, null)]
         [InlineData("1", "2")]
         [InlineData("s", "a")]
-        public void InsertInStart_Valid_String_By_Count_And_Index(string item1, string item2)
+        public void InsertInStart_Valid_StringByCountAndIndex(string item1, string item2)
         {
             // Arrange
             var expectedindexItem1 = 1;
@@ -102,7 +102,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(null, null)]
         [InlineData("1", "1")]
         [InlineData("s", "s")]
-        public void InsertInStart_Valid_String_By_Equals(string item1, string item2)
+        public void InsertInStart_Valid_StringByEquals(string item1, string item2)
         {
             // Arrange
             var expectedСollection = new MyList<string>();
@@ -121,7 +121,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForInsertInStart.GetDataForInsertInStartValidClassByEquals), MemberType = typeof(MyListSourceDataForInsertInStart))]
-        public void InsertInStart_Valid_Class_By_Equals(Employee[] values, MyList<Employee> expectedСollection)
+        public void InsertInStart_Valid_ClassByEquals(Employee[] values, MyList<Employee> expectedСollection)
         {
             _collectionClass.Add(new Employee { Name = "Alex", Age = 23 });
 

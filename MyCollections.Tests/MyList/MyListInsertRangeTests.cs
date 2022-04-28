@@ -27,7 +27,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(new int[] { 1, 10, 100, 1000 }, 6, 14, 9, 1000)]
         [InlineData(new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 7, 20, 7, 0)]
         [InlineData(new int[] { -1, 0, 1 }, 9, 13, 11, 1)]
-        public void InsertRange_Valid_Int_By_Count_And_Index_1(int[] value, int index, int expectedCount, int expectedIndex, int expectedValue)
+        public void InsertRange_Valid_IntByCountAndIndex1(int[] value, int index, int expectedCount, int expectedIndex, int expectedValue)
         {
             // Arrange
             for (int i = 0; i < 10; i++)
@@ -45,7 +45,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForInsertRange.GetDataForInsertRangeValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForInsertRange))]
-        public void InsertRange_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int index, int[] value, int expectedCount, int expectedIndex, int expectedValue)
+        public void InsertRange_Valid_IntByCountAndIndex2(IMyCollection<int> collection, int index, int[] value, int expectedCount, int expectedIndex, int expectedValue)
         {
             // Act
             collection.InsertRange(index, value);
@@ -57,7 +57,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForInsertRange.GetDataForInsertRangeValidIntByEquals), MemberType = typeof(MyListSourceDataForInsertRange))]
-        public void InsertRange_Valid_Int_By_Equals(int[] indexes, int[,] values, IMyCollection<int> expectedСollection)
+        public void InsertRange_Valid_IntByEquals(int[] indexes, int[,] values, IMyCollection<int> expectedСollection)
         {
             // Arrange
             for (int i = 0; i < 100; i++)
@@ -82,12 +82,25 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
+        [InlineData(10, new int[] { 0, 10 })]
+        [InlineData(102, new int[] { 0, 10 })]
+        [InlineData(1000, new int[] { 0, 10 })]
+        public void InsertRange_Invalid_Int(int index, int[] value)
+        {
+            // Act
+            Action act = () => _collectionInt.InsertRange(index, value);
+
+            // Assert
+            act.Should().Throw<IndexOutOfRangeException>();
+        }
+
+        [Theory]
         [InlineData(2, new string[] { "tom", "sem", "bob" }, 4, "bob", 54, new string[] { "tom", "sem", "bob" }, 55, "sem", 106)]
         [InlineData(1, new string[] { "", "", "" }, 2, "", 65, new string[] { "", "", "", "", "" }, 67, "", 108)]
         [InlineData(10, new string[] { null, null }, 11, null, 96, new string[] { null, null }, 96, null, 104)]
         [InlineData(3, new string[] { "1", "2", "3", "4", "5" }, 6, "4", 89, new string[] { "6", "7", "8", "9", "10" }, 91, "8", 110)]
         [InlineData(24, new string[] { "q", "w", "e", "r", "t", "y" }, 28, "t", 105, new string[] { "a", "s", "d", "f", "g", "h" }, 107, "d", 112)]
-        public void InsertRange_Valid_String_By_Count_And_Index(int indexItem1, string[] items1, int expectedIndexItem1, string expectedItem1, int indexItem2, string[] items2, int expectedIndexItem2, string expectedItem2, int expectedCount)
+        public void InsertRange_Valid_StringByCountAndIndex(int indexItem1, string[] items1, int expectedIndexItem1, string expectedItem1, int indexItem2, string[] items2, int expectedIndexItem2, string expectedItem2, int expectedCount)
         {
             // Arrange
             for (int i = 0; i < 100; i++)
@@ -112,7 +125,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(7, new string[] { null, null }, 76, new string[] { null, null })]
         [InlineData(56, new string[] { "1", "2", "3", "4", "5" }, 90, new string[] { "6", "7", "8", "9", "10" })]
         [InlineData(43, new string[] { "q", "w", "e", "r", "t", "y" }, 99, new string[] { "a", "s", "d", "f", "g", "h" })]
-        public void InsertRange_Valid_String_By_Equals(int indexItem1, string[] items1, int indexItem2, string[] items2)
+        public void InsertRange_Valid_StringByEquals(int indexItem1, string[] items1, int indexItem2, string[] items2)
         {
             // Arrange
             var expectedСollection = new MyList<string>();
@@ -138,7 +151,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForInsertRange.GetDataForInsertRangeValidClassByEquals), MemberType = typeof(MyListSourceDataForInsertRange))]
-        public void InsertRange_Valid_Class_By_Equals(int[] indexes, Employee[,] values, MyList<Employee> expectedСollection)
+        public void InsertRange_Valid_ClassByEquals(int[] indexes, Employee[,] values, MyList<Employee> expectedСollection)
         {
             for (int i = 0; i < 100; i++)
             {

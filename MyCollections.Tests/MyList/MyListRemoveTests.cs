@@ -26,7 +26,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(10, 50, 50, 90)]
         [InlineData(50, 49, 49, 50)]
         [InlineData(99, 0, 0, 1)]
-        public void Remove_Valid_Int_By_Count_And_Index_1(int qtyRemoves, int expectedIndex, int expectedValue, int expectedCount)
+        public void Remove_Valid_IntByCountAndIndex1(int qtyRemoves, int expectedIndex, int expectedValue, int expectedCount)
         {
             // Act
             for (int i = 0; i < qtyRemoves; i++)
@@ -41,7 +41,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemove.GetDataForRemoveValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForRemove))]
-        public void Remove_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int qtyRemoves, int expectedIndex, int expectedValue, int expectedCount)
+        public void Remove_Valid_IntByCountAndIndex2(IMyCollection<int> collection, int qtyRemoves, int expectedIndex, int expectedValue, int expectedCount)
         {
             // Act
             for (int i = 0; i < qtyRemoves; i++)
@@ -56,7 +56,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemove.GetDataForRemoveValidIntByEquals), MemberType = typeof(MyListSourceDataForRemove))]
-        public void Remove_Valid_Int_By_Equals(IMyCollection<int> expectedСollection, int qtyRemoves)
+        public void Remove_Valid_IntByEquals(IMyCollection<int> expectedСollection, int qtyRemoves)
         {
             // Act
             for (int i = 0; i < qtyRemoves; i++)
@@ -74,7 +74,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(10, 12, "Ethan", 25, "Joseph", 90)]
         [InlineData(50, 15, "Logan", 40, "Anthony", 50)]
         [InlineData(98, 0, "Liam", 1, "Noah", 2)]
-        public void Remove_Valid_String_By_Count_And_Index(int qtyRemoves, int expectedindexItem1, string expectedItem1,
+        public void Remove_Valid_StringByCountAndIndex(int qtyRemoves, int expectedindexItem1, string expectedItem1,
             int expectedindexItem2, string expectedItem2, int expectedCount)
         {
             // Act
@@ -96,7 +96,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(60)]
         [InlineData(100)]
         [InlineData(150)]
-        public void Remove_Valid_String_By_Equals(int qtyRemoves)
+        public void Remove_Valid_StringByEquals(int qtyRemoves)
         {
             // Arrange
             var expectedСollection = new MyList<string>(ArrayInitializationString());
@@ -117,7 +117,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemove.GetDataForRemoveValidClassByEquals), MemberType = typeof(MyListSourceDataForRemove))]
-        public void Remove_Valid_Class_By_Equals(int qtyRemoves, MyList<Employee> expectedСollection)
+        public void Remove_Valid_ClassByEquals(int qtyRemoves, MyList<Employee> expectedСollection)
         {
             for (int i = 0; i < qtyRemoves; i++)
             {

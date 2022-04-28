@@ -74,7 +74,7 @@ namespace MyCollections.Generic
         public void Add(T item)
         {
             var countObj = 1;
-            _array = UpResizeArray(countObj);
+            _array = UpSizeArray(countObj);
 
             _array[Count] = item;
             AddCount(countObj);
@@ -90,7 +90,7 @@ namespace MyCollections.Generic
             if (ValidateIndex(index, Count))
             {
                 var countObj = 1;
-                _array = UpResizeArray(countObj);
+                _array = UpSizeArray(countObj);
                 for (int i = Count; i > index; i--)
                 {
                     _array[i] = _array[i - 1];
@@ -125,7 +125,7 @@ namespace MyCollections.Generic
         public void AddRange(T[] array)
         {
             var countObj = array.Length;
-            _array = UpResizeArray(countObj);
+            _array = UpSizeArray(countObj);
 
             for (int i = 0; i < array.Length; i++)
             {
@@ -145,7 +145,7 @@ namespace MyCollections.Generic
             if (ValidateIndex(index, Count))
             {
                 var countObj = array.Length;
-                _array = UpResizeArray(countObj);
+                _array = UpSizeArray(countObj);
                 var actualIndex = Count + array.Length - 1;
 
                 for (int i = Count - 1; i >= index && actualIndex >= index + array.Length; i--)
@@ -182,7 +182,7 @@ namespace MyCollections.Generic
         {
             var countObj = 1;
             RemoveCount(countObj);
-            _array = DownResizeArray();
+            _array = DownSizeArray();
         }
 
         /// <summary>
@@ -208,7 +208,7 @@ namespace MyCollections.Generic
                 }
 
                 RemoveCount(countObj);
-                _array = DownResizeArray();
+                _array = DownSizeArray();
             }
             else
             {
@@ -223,7 +223,7 @@ namespace MyCollections.Generic
         public void RemoveRange(int count)
         {
             RemoveCount(count);
-            _array = DownResizeArray();
+            _array = DownSizeArray();
         }
 
         /// <summary>
@@ -259,7 +259,7 @@ namespace MyCollections.Generic
                 }
 
                 RemoveCount(countObj);
-                _array = DownResizeArray();
+                _array = DownSizeArray();
             }
             else
             {
@@ -387,7 +387,7 @@ namespace MyCollections.Generic
         /// </summary>
         /// <param name="countObjects">The number of objects to insert into the array</param>
         /// <returns></returns>
-        private T[] UpResizeArray(int countObjects)
+        private T[] UpSizeArray(int countObjects)
         {
             if (_array.Length <= (Count + countObjects))
             {
@@ -413,7 +413,7 @@ namespace MyCollections.Generic
         /// Change the number of elements in an array to less, keeping the contents
         /// </summary>
         /// <returns></returns>
-        private T[] DownResizeArray()
+        private T[] DownSizeArray()
         {
             if (Count * 2 <= _array.Length)
             {

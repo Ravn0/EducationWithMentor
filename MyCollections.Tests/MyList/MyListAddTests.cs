@@ -28,7 +28,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(100)]
         [InlineData(1000)]
         [InlineData(10000)]
-        public void Add_Valid_Int_By_Count_And_Index_1(int value)
+        public void Add_Valid_IntByCountAndIndex1(int value)
         {
             // Arrange
             var expectedIndex = 0;
@@ -44,7 +44,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForAdd.GetDataForAddValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForAdd))]
-        public void Add_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int value, int expectedCount, int expectedIndex)
+        public void Add_Valid_IntByCounAndIndex2(IMyCollection<int> collection, int value, int expectedCount, int expectedIndex)
         {
             // Act
             collection.Add(value);
@@ -56,7 +56,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForAdd.GetDataForAddValidIntByEquals), MemberType = typeof(MyListSourceDataForAdd))]
-        public void Add_Valid_Int_By_Equals(int[] values, IMyCollection<int> expectedСollection)
+        public void Add_Valid_IntByEquals(int[] values, IMyCollection<int> expectedСollection)
         {
             // Act
             for (int i = 0; i < values.Length; i++)
@@ -74,7 +74,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(null, null)]
         [InlineData("1", "1")]
         [InlineData("s", "s")]
-        public void Add_Valid_String_By_Count_And_Index(string item1, string item2)
+        public void Add_Valid_StringByCountAndIndex(string item1, string item2)
         {
             // Arrange
             var expectedIndexItem1 = 0;
@@ -97,7 +97,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(null, null)]
         [InlineData("1", "1")]
         [InlineData("s", "s")]
-        public void Add_Valid_String_By_Equals(string item1, string item2)
+        public void Add_Valid_StringByEquals(string item1, string item2)
         {
             // Arrange
             var expectedСollection = new MyList<string>();
@@ -114,7 +114,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForAdd.GetDataForAddValidClassByEquals), MemberType = typeof(MyListSourceDataForAdd))]
-        public void Add_Valid_Class_By_Equals(Employee[] values, MyList<Employee> expectedСollection)
+        public void Add_Valid_ClassByEquals(Employee[] values, MyList<Employee> expectedСollection)
         {
             for (int i = 0; i < values.Length; i++)
             {

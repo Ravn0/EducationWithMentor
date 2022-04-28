@@ -26,7 +26,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(10, 89, 99, 90)]
         [InlineData(50, 39, 89, 50)]
         [InlineData(99, 0, 99, 1)]
-        public void RemoveRangeStart_Valid_Int_By_Count_And_Index_1(int count, int expectedIndex, int expectedValue, int expectedCount)
+        public void RemoveRangeStart_Valid_IntByCountAndIndex1(int count, int expectedIndex, int expectedValue, int expectedCount)
         {
             // Act
             _collectionInt.RemoveRangeStart(count);
@@ -38,7 +38,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemoveRangeStart.GetDataForRemoveRangeStartValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForRemoveRangeStart))]
-        public void RemoveRangeStart_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int count, int expectedIndex, int expectedValue, int expectedCount)
+        public void RemoveRangeStart_Valid_IntByCountAndIndex2(IMyCollection<int> collection, int count, int expectedIndex, int expectedValue, int expectedCount)
         {
             // Act
             collection.RemoveRangeStart(count);
@@ -50,7 +50,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemoveRangeStart.GetDataForRemoveRangeStartValidIntByEquals), MemberType = typeof(MyListSourceDataForRemoveRangeStart))]
-        public void RemoveRangeStart_Valid_Int_By_Equals(IMyCollection<int> expectedСollection, int count)
+        public void RemoveRangeStart_Valid_IntByEquals(IMyCollection<int> expectedСollection, int count)
         {
             // Act
             _collectionInt.RemoveRangeStart(count);
@@ -65,7 +65,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(10, 12, "Theodore", 25, "Leo", 90)]
         [InlineData(50, 15, "Colton", 49, "Silas", 50)]
         [InlineData(98, 0, "Kayden", 1, "Silas", 2)]
-        public void RemoveRangeStart_Valid_String_By_Count_And_Index(int count, int expectedindexItem1, string expectedItem1,
+        public void RemoveRangeStart_Valid_StringByCountAndIndex(int count, int expectedindexItem1, string expectedItem1,
             int expectedindexItem2, string expectedItem2, int expectedCount)
         {
             // Act
@@ -85,7 +85,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(99)]
         [InlineData(100)]
         [InlineData(150)]
-        public void RemoveRangeStart_Valid_String_By_Equals(int count)
+        public void RemoveRangeStart_Valid_StringByEquals(int count)
         {
             // Arrange
             var expectedСollection = new MyList<string>(ArrayInitializationString());
@@ -100,7 +100,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemoveRangeStart.GetDataForRemoveRangeStartValidClassByEquals), MemberType = typeof(MyListSourceDataForRemoveRangeStart))]
-        public void RemoveRangeStart_Valid_Class_By_Equals(int count, MyList<Employee> expectedСollection)
+        public void RemoveRangeStart_Valid_ClassByEquals(int count, MyList<Employee> expectedСollection)
         {
             _collectionClass.RemoveRangeStart(count);
 

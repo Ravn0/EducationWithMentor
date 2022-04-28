@@ -26,7 +26,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(10, 50, 51, 99)]
         [InlineData(50, 1, 1, 99)]
         [InlineData(99, 50, 50, 99)]
-        public void RemoveAt_Valid_Int_By_Count_And_Index_1(int index, int expectedIndex, int expectedValue, int expectedCount)
+        public void RemoveAt_Valid_IntByCountAndIndex1(int index, int expectedIndex, int expectedValue, int expectedCount)
         {
             // Act
             _collectionInt.RemoveAt(index);
@@ -37,24 +37,21 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [InlineData(0, 10, 11, 99)]
-        [InlineData(1, 20, 21, 99)]
-        [InlineData(10, 50, 51, 99)]
-        [InlineData(50, 1, 1, 99)]
-        [InlineData(99, 50, 50, 99)]
-        public void RemoveAt_Invalid_Int(int index, int expectedIndex, int expectedValue, int expectedCount)
+        [InlineData(100)]
+        [InlineData(102)]
+        [InlineData(1000)]
+        public void RemoveAt_Invalid_Int(int index)
         {
             // Act
-            _collectionInt.RemoveAt(index);
+            Action act = () => _collectionInt.RemoveAt(index);
 
             // Assert
-            _collectionInt.Count.Should().Be(expectedCount);
-            _collectionInt[expectedIndex].Should().Be(expectedValue);
+            act.Should().Throw<IndexOutOfRangeException>();
         }
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemoveAt.GetDataForRemoveAtValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForRemoveAt))]
-        public void RemoveAt_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int index, int expectedIndex, int expectedValue, int expectedCount)
+        public void RemoveAt_Valid_IntByCountAndIndex2(IMyCollection<int> collection, int index, int expectedIndex, int expectedValue, int expectedCount)
         {
             // Act
             collection.RemoveAt(index);
@@ -66,7 +63,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemoveAt.GetDataForRemoveAtValidIntByEquals), MemberType = typeof(MyListSourceDataForRemoveAt))]
-        public void RemoveAt_Valid_Int_By_Equals(IMyCollection<int> expectedСollection, int index)
+        public void RemoveAt_Valid_IntByEquals(IMyCollection<int> expectedСollection, int index)
         {
             // Act
             _collectionInt.RemoveAt(index);
@@ -81,7 +78,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(10, 12, "Daniel", 25, "John", 99)]
         [InlineData(50, 15, "Logan", 60, "Christian", 99)]
         [InlineData(98, 0, "Liam", 98, "Silas", 99)]
-        public void RemoveAt_Valid_String_By_Count_And_Index(int index, int expectedindexItem1, string expectedItem1,
+        public void RemoveAt_Valid_StringByCountAndIndex(int index, int expectedindexItem1, string expectedItem1,
             int expectedindexItem2, string expectedItem2, int expectedCount)
         {
             // Act
@@ -99,7 +96,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(20)]
         [InlineData(60)]
         [InlineData(99)]
-        public void RemoveAt_Valid_String_By_Equals(int index)
+        public void RemoveAt_Valid_StringByEquals(int index)
         {
             // Arrange
             var expectedСollection = new MyList<string>(ArrayInitializationString());
@@ -114,7 +111,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemoveAt.GetDataForRemoveAtValidClassByEquals), MemberType = typeof(MyListSourceDataForRemoveAt))]
-        public void RemoveAt_Valid_Class_By_Equals(int[] indexes, MyList<Employee> expectedСollection)
+        public void RemoveAt_Valid_ClassByEquals(int[] indexes, MyList<Employee> expectedСollection)
         {
             for (int i = 0; i < indexes.Length; i++)
             {

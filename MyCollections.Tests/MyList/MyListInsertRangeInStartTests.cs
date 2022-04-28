@@ -27,7 +27,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(new int[] { 1, 10, 100, 1000 }, 2, 100, 5)]
         [InlineData(new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 0, 0, 11)]
         [InlineData(new int[] { -1, 0, 1 }, 2, 1, 4)]
-        public void InsertRangeInStart_Valid_Int_By_Count_And_Index_1(int[] value, int expectedIndex, int expectedValue, int expectedCount)
+        public void InsertRangeInStart_Valid_IntByCountAndIndex1(int[] value, int expectedIndex, int expectedValue, int expectedCount)
         {
             // Arrange
             _collectionInt.Add(0);
@@ -42,7 +42,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForInsertRangeInStart.GetDataForInsertRangeInStartValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForInsertRangeInStart))]
-        public void InsertRangeInStart_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int[] values, int expectedCount, int expectedIndex, int expectedValue)
+        public void InsertRangeInStart_Valid_IntByCountAndIndex2(IMyCollection<int> collection, int[] values, int expectedCount, int expectedIndex, int expectedValue)
         {
             // Act
             collection.InsertRangeInStart(values);
@@ -54,7 +54,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForInsertRangeInStart.GetDataForInsertRangeInStartValidIntByEquals), MemberType = typeof(MyListSourceDataForInsertRangeInStart))]
-        public void InsertRangeInStart_Valid_Int_By_Equals(int[,] values, IMyCollection<int> expectedСollection)
+        public void InsertRangeInStart_Valid_IntByEquals(int[,] values, IMyCollection<int> expectedСollection)
         {
             // Arrange
             _collectionInt.Add(0);
@@ -81,7 +81,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(3, new string[] { null, null }, null, 0, new string[] { null, null }, null, 5)]
         [InlineData(8, new string[] { "1", "2", "3", "4", "5" }, "4", 2, new string[] { "6", "7", "8", "9", "10" }, "8", 11)]
         [InlineData(10, new string[] { "q", "w", "e", "r", "t", "y" }, "t", 2, new string[] { "a", "s", "d", "f", "g", "h" }, "d", 13)]
-        public void InsertRangeInStart_Valid_String_By_Count_And_Index(int indexItem1, string[] items1, string expectedItem1, int indexItem2, string[] items2, string expectedItem2, int expectedCount)
+        public void InsertRangeInStart_Valid_StringByCountAndIndex(int indexItem1, string[] items1, string expectedItem1, int indexItem2, string[] items2, string expectedItem2, int expectedCount)
         {
             // Arrange
             _collectionString.Add("Alex");
@@ -102,7 +102,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(new string[] { null, null }, new string[] { null, null })]
         [InlineData(new string[] { "1", "2", "3", "4", "5" }, new string[] { "6", "7", "8", "9", "10" })]
         [InlineData(new string[] { "q", "w", "e", "r", "t", "y" }, new string[] { "a", "s", "d", "f", "g", "h" })]
-        public void InsertRangeInStart_Valid_String_By_Equals(string[] items1, string[] items2)
+        public void InsertRangeInStart_Valid_StringByEquals(string[] items1, string[] items2)
         {
             // Arrange
             var expectedСollection = new MyList<string>();
@@ -121,7 +121,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForInsertRangeInStart.GetDataForInsertRangeInStartValidClassByEquals), MemberType = typeof(MyListSourceDataForInsertRangeInStart))]
-        public void InsertRangeInStart_Valid_Class_By_Equals(Employee[,] values, MyList<Employee> expectedСollection)
+        public void InsertRangeInStart_Valid_ClassByEquals(Employee[,] values, MyList<Employee> expectedСollection)
         {
             _collectionClass.Add(new Employee { Name = "Alex", Age = 23 });
 

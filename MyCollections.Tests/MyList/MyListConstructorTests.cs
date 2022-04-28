@@ -17,6 +17,19 @@ namespace MyCollections.Tests.MyList
 
         }
 
+        [Fact]
+        public void Constructor_Valid_Int0()
+        {
+            // Arrange
+            var expectedCount = 0;
+
+            // Act
+            _collectionInt = new MyList<int>();
+
+            // Assert
+            _collectionInt.Count.Should().Be(expectedCount);
+        }
+
         [Theory]
         [InlineData(-1)]
         [InlineData(0)]
@@ -25,7 +38,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(100)]
         [InlineData(1000)]
         [InlineData(10000)]
-        public void Constructor_Valid_Int_1(int value)
+        public void Constructor_Valid_Int1(int value)
         {
             // Arrange
             var expectedIndex = 0;
@@ -44,7 +57,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(new int[] { -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5 }, 3, -2, 11)]
         [InlineData(new int[] { 0, 0, 0 }, 2, 0, 3)]
         [InlineData(new int[] { 1, 10, 100, 1000, 10000 }, 3, 1000, 5)]
-        public void Constructor_Valid_Int_2(int[] value, int expectedIndex, int expectedValue, int expectedCount)
+        public void Constructor_Valid_Int2(int[] value, int expectedIndex, int expectedValue, int expectedCount)
         {
 
             // Act
@@ -61,7 +74,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(null)]
         [InlineData("1")]
         [InlineData("s")]
-        public void Constructor_Valid_String_1(string value)
+        public void Constructor_Valid_String1(string value)
         {
             // Arrange
             var expectedIndex = 0;
@@ -81,7 +94,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(new string[] { null, null, null, null }, 3, null, 4)]
         [InlineData(new string[] { "1", "2", "3", "4", "5" }, 2, "3", 5)]
         [InlineData(new string[] { "a", "q", "w", "e", "s", "f" }, 5, "f", 6)]
-        public void Constructor_Valid_String_2(string[] value, int expectedIndex, string expectedValue, int expectedCount)
+        public void Constructor_Valid_String2(string[] value, int expectedIndex, string expectedValue, int expectedCount)
         {
 
             // Act

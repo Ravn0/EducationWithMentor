@@ -26,7 +26,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(10, 10, 89, 99, 90)]
         [InlineData(70, 20, 39, 39, 80)]
         [InlineData(90, 99, 2, 2, 90)]
-        public void RemoveRangeAt_Valid_Int_By_Count_And_Index_1(int index, int count, int expectedIndex, int expectedValue, int expectedCount)
+        public void RemoveRangeAt_Valid_IntByCountAndIndex1(int index, int count, int expectedIndex, int expectedValue, int expectedCount)
         {
             // Act
             _collectionInt.RemoveRangeAt(index, count);
@@ -38,7 +38,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemoveRangeAt.GetDataForRemoveRangeAtValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForRemoveRangeAt))]
-        public void RemoveRangeAt_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int index, int count, int expectedIndex, int expectedValue, int expectedCount)
+        public void RemoveRangeAt_Valid_IntByCountAndIndex2(IMyCollection<int> collection, int index, int count, int expectedIndex, int expectedValue, int expectedCount)
         {
             // Act
             collection.RemoveRangeAt(index, count);
@@ -50,7 +50,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemoveRangeAt.GetDataForRemoveRangeAtValidIntByEquals), MemberType = typeof(MyListSourceDataForRemoveRangeAt))]
-        public void RemoveRangeAt_Valid_Int_By_Equals(IMyCollection<int> expectedСollection, int index, int count)
+        public void RemoveRangeAt_Valid_IntByEquals(IMyCollection<int> expectedСollection, int index, int count)
         {
             // Act
             _collectionInt.RemoveRangeAt(index, count);
@@ -60,12 +60,25 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
+        [InlineData(100, 10)]
+        [InlineData(102, 20)]
+        [InlineData(1000, 30)]
+        public void RemoveRangeAt_Invalid_Int(int index, int count)
+        {
+            // Act
+            Action act = () => _collectionInt.RemoveRangeAt(index, count);
+
+            // Assert
+            act.Should().Throw<IndexOutOfRangeException>();
+        }
+
+        [Theory]
         [InlineData(10, 0, 10, "Mason", 40, "Anthony", 100)]
         [InlineData(15, 1, 10, "Mason", 20, "Owen", 99)]
         [InlineData(14, 10, 12, "Ethan", 25, "Leo", 90)]
         [InlineData(5, 50, 15, "Colton", 49, "Silas", 50)]
         [InlineData(90, 98, 0, "Liam", 89, "Everett", 90)]
-        public void RemoveRangeAt_Valid_String_By_Count_And_Index(int index, int count, int expectedindexItem1, string expectedItem1,
+        public void RemoveRangeAt_Valid_StringByCountAndIndex(int index, int count, int expectedindexItem1, string expectedItem1,
             int expectedindexItem2, string expectedItem2, int expectedCount)
         {
             // Act
@@ -85,7 +98,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(50, 99)]
         [InlineData(10, 100)]
         [InlineData(68, 150)]
-        public void RemoveRangeAt_Valid_String_By_Equals(int index, int count)
+        public void RemoveRangeAt_Valid_StringByEquals(int index, int count)
         {
             // Arrange
             var expectedСollection = new MyList<string>(ArrayInitializationString());
@@ -100,7 +113,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemoveRangeAt.GetDataForRemoveRangeAtValidClassByEquals), MemberType = typeof(MyListSourceDataForRemoveRangeAt))]
-        public void RemoveRangeAt_Valid_Class_By_Equals(int index, int count, MyList<Employee> expectedСollection)
+        public void RemoveRangeAt_Valid_ClassByEquals(int index, int count, MyList<Employee> expectedСollection)
         {
             _collectionClass.RemoveRangeAt(index, count);
 

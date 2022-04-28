@@ -26,7 +26,7 @@ namespace MyCollections.Tests.MyList
         [InlineData(7, 11, 8, 14)]
         [InlineData(9, 13, 9, 14)]
         [InlineData(99, 0, 0, 15)]
-        public void RemoveFirst_Valid_Int_By_Count_And_Index_1(int value, int expectedIndex, int expectedValue, int expectedCount)
+        public void RemoveFirst_Valid_IntByCountAndIndex1(int value, int expectedIndex, int expectedValue, int expectedCount)
         {
             // Arrange
             _collectionInt = new MyList<int>(new int[] { 0, 0, 1, 2, 3, 4, 5, 6, 7, 7, 7, 7, 8, 9, 9 });
@@ -41,7 +41,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemoveFirst.GetDataForRemoveFirstValidIntByCountAndIndex), MemberType = typeof(MyListSourceDataForRemoveFirst))]
-        public void RemoveFirst_Valid_Int_By_Count_And_Index_2(IMyCollection<int> collection, int value, int expectedIndex, int expectedValue, int expectedCount)
+        public void RemoveFirst_Valid_IntByCountAndIndex2(IMyCollection<int> collection, int value, int expectedIndex, int expectedValue, int expectedCount)
         {
             // Act
             collection.RemoveFirst(value);
@@ -53,7 +53,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemoveFirst.GetDataForRemoveFirstValidIntByEquals), MemberType = typeof(MyListSourceDataForRemoveFirst))]
-        public void RemoveFirst_Valid_Int_By_Equals(IMyCollection<int> expectedСollection, int value)
+        public void RemoveFirst_Valid_IntByEquals(IMyCollection<int> expectedСollection, int value)
         {
             // Arrange
             _collectionInt = new MyList<int>(new int[] { -2, -2, -1, 0, 0, 1, 2, 3, 4, 5, 6, 7, 7, 7, 7, 8, 9, 9 });
@@ -72,7 +72,7 @@ namespace MyCollections.Tests.MyList
         [InlineData("sam", 1, "tom", 5, "sam", 11)]
         [InlineData("Liam", 0, "alex", 9, "jack", 12)]
         [InlineData(null, 0, "alex", 9, "jack", 11)]
-        public void RemoveFirst_Valid_String_By_Count_And_Index(string value, int expectedindexItem1, string expectedItem1,
+        public void RemoveFirst_Valid_StringByCountAndIndex(string value, int expectedindexItem1, string expectedItem1,
             int expectedindexItem2, string expectedItem2, int expectedCount)
         {
             // Arrange
@@ -95,7 +95,7 @@ namespace MyCollections.Tests.MyList
         [InlineData("jack")]
         [InlineData("Liam")]
         [InlineData(null)]
-        public void RemoveFirst_Valid_String_By_Equals(string value)
+        public void RemoveFirst_Valid_StringByEquals(string value)
         {
             // Arrange
             var expectedСollection = new MyList<string>(new string[] { "alex", "tom", "tom", "ban", "igor", "sam", "sam", "sam", "oliver", "jack", null, null });
@@ -111,7 +111,7 @@ namespace MyCollections.Tests.MyList
 
         [Theory]
         [MemberData(nameof(MyListSourceDataForRemoveFirst.GetDataForRemoveFirstValidClassByEquals), MemberType = typeof(MyListSourceDataForRemoveFirst))]
-        public void RemoveFirst_Valid_Class_By_Equals(Employee value, MyList<Employee> expectedСollection)
+        public void RemoveFirst_Valid_ClassByEquals(Employee value, MyList<Employee> expectedСollection)
         {
             _collectionClass = new MyList<Employee>(new Employee[] {
             new Employee { Name = "alex", Age = 23 },
