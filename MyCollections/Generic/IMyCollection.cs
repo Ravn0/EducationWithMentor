@@ -17,5 +17,21 @@
         void InsertRange(int index, T[] array);
 
         void InsertRangeInStart(T[] array);
+
+        void Remove();
+
+        void RemoveStart();
+
+        void RemoveAt(int index);
+
+        void RemoveRange(int count);
+
+        void RemoveRangeStart(int count);
+
+        void RemoveRangeAt(int index, int count);
+
+        void RemoveFirst(T value);
+
+        int RemoveAll(T value);
     }
 }
