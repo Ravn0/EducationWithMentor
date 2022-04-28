@@ -327,6 +327,36 @@ namespace MyCollections.Generic
             return countRemoves;
         }
 
+        /// <summary>
+        /// Determines whether an element is in the MyList<T>.
+        /// </summary>
+        /// <param name="item">The object to locate in the MyList<T>. The value can be null for reference types.</param>
+        /// <returns></returns>
+        public bool Contains(T item)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Searches for the specified object and returns the zero-based index of the first occurrence within the entire List<T>.
+        /// </summary>
+        /// <param name="item">The object to locate in the List<T>. The value can be null for reference types.</param>
+        /// <returns></returns>
+        public int IndexOf(T item)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Searches for the element at the specified index of the List<T>.
+        /// </summary>
+        /// <param name="index">The zero-based starting index of the search range.</param>
+        /// <returns></returns>
+        public T Find(int index)
+        {
+            throw new NotImplementedException();
+        }
+
         public override string ToString()
         {
             StringBuilder result = new StringBuilder();
