@@ -60,7 +60,7 @@ namespace MyCollections.Tests.MyList
         [InlineData("Liam", 0, null, -1)]
         [InlineData(null, -1, "Jack", 20)]
         [InlineData(null, -1, null, -1)]
-        public void IndexOf_Valid_String(string value1, int expectedResult1, string value2, int expectedResult2)
+        public void IndexOf_Valid_String1(string value1, int expectedResult1, string value2, int expectedResult2)
         {
             // Act
             var result1 = _collectionString.IndexOf(value1);
@@ -69,6 +69,26 @@ namespace MyCollections.Tests.MyList
             // Assert
             result1.Should().Be(expectedResult1);
             result2.Should().Be(expectedResult2);
+        }
+
+        [Theory]
+        [InlineData("Mason", 3)]
+        [InlineData("Ethan", 5)]
+        [InlineData("Logan", 1)]
+        [InlineData("Liam", 0)]
+        [InlineData("Sam", -1)]
+        [InlineData("Ban", -1)]
+        [InlineData(null, 2)]
+        public void IndexOf_Valid_String2(string value1, int expectedResult1)
+        {
+            // Arrange
+            _collectionString = new MyList<string>(new string[] { "Liam", "Logan", null, "Mason", null, "Ethan" });
+
+            // Act
+            var result1 = _collectionString.IndexOf(value1);
+
+            // Assert
+            result1.Should().Be(expectedResult1);
         }
 
         [Theory]

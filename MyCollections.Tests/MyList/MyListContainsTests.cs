@@ -60,7 +60,7 @@ namespace MyCollections.Tests.MyList
         [InlineData("Liam", true, null, false)]
         [InlineData(null, false, "Jack", true)]
         [InlineData(null, false, null, false)]
-        public void Contains_Valid_String(string value1, bool expectedResult1, string value2, bool expectedResult2)
+        public void Contains_Valid_String1(string value1, bool expectedResult1, string value2, bool expectedResult2)
         {
             // Act
             var result1 = _collectionString.Contains(value1);
@@ -69,6 +69,26 @@ namespace MyCollections.Tests.MyList
             // Assert
             result1.Should().Be(expectedResult1);
             result2.Should().Be(expectedResult2);
+        }
+
+        [Theory]
+        [InlineData("Mason", true)]
+        [InlineData("Ethan", true)]
+        [InlineData("Logan", true)]
+        [InlineData("Liam", true)]
+        [InlineData("Sam", false)]
+        [InlineData("Ban", false)]
+        [InlineData(null, true)]
+        public void Contains_Valid_String2(string value, bool expectedResult)
+        {
+            // Arrange
+            _collectionString = new MyList<string>(new string[] { "Liam", "Logan", null, "Mason", null, "Ethan" });
+
+            // Act
+            var result = _collectionString.Contains(value);
+
+            // Assert
+            result.Should().Be(expectedResult);
         }
 
         [Theory]

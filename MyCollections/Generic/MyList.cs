@@ -334,7 +334,29 @@ namespace MyCollections.Generic
         /// <returns></returns>
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            var result = false;
+
+            for (int i = 0; i < Count; i++)
+            {
+                if (_array[i] == null && item == null)
+                {
+                    result = true;
+                    break;
+                }
+
+                if (_array[i] == null && item != null)
+                {
+                    continue;
+                }
+
+                if (_array[i].Equals(item))
+                {
+                    result = true;
+                    break;
+                }
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -344,7 +366,29 @@ namespace MyCollections.Generic
         /// <returns></returns>
         public int IndexOf(T item)
         {
-            throw new NotImplementedException();
+            var result = -1;
+
+            for (int i = 0; i < Count; i++)
+            {
+                if (_array[i] == null && item == null)
+                {
+                    result = i;
+                    break;
+                }
+
+                if (_array[i] == null && item != null)
+                {
+                    continue;
+                }
+
+                if (_array[i].Equals(item))
+                {
+                    result = i;
+                    break;
+                }
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -354,7 +398,14 @@ namespace MyCollections.Generic
         /// <returns></returns>
         public T Find(int index)
         {
-            throw new NotImplementedException();
+            if (ValidateIndex(index, Count))
+            {
+                return _array[index];
+            }
+            else
+            {
+                throw new IndexOutOfRangeException($"Index: {index}, Count objects in collection: {Count}");
+            }
         }
 
         public override string ToString()
