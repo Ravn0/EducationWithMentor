@@ -7,13 +7,13 @@ using MyCollections.Tests.ClassForTests;
 
 namespace MyCollections.Tests.MyList
 {
-    public class MyListFindTests
+    public class MyListIndexTests
     {
         protected IMyCollection<int> _collectionInt;
         protected IMyCollection<string> _collectionString;
         protected IMyCollection<Employee> _collectionClass;
 
-        public MyListFindTests()
+        public MyListIndexTests()
         {
             _collectionInt = new MyList<int>(ArrayInitializationInt());
             _collectionString = new MyList<string>(ArrayInitializationString());
@@ -26,21 +26,21 @@ namespace MyCollections.Tests.MyList
         [InlineData(10, 10)]
         [InlineData(50, 50)]
         [InlineData(99, 99)]
-        public void Find_Valid_Int1(int index, int expectedResult)
+        public void Index_Valid_Int1(int index, int expectedResult)
         {
             // Act
-            var result = _collectionInt.Find(index);
+            var result = _collectionInt[index];
 
             // Assert
             result.Should().Be(expectedResult);
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceDataForFind.GetDataForFindValidInt), MemberType = typeof(MyListSourceDataForFind))]
-        public void Find_Valid_Int2(IMyCollection<int> collection, int index, int expectedResult)
+        [MemberData(nameof(MyListSourceDataForIndex.GetDataForIndexValidInt), MemberType = typeof(MyListSourceDataForIndex))]
+        public void Index_Valid_Int2(IMyCollection<int> collection, int index, int expectedResult)
         {
             // Act
-            var result = collection.Find(index);
+            var result = collection[index];
 
             // Assert
             result.Should().Be(expectedResult);
@@ -50,13 +50,13 @@ namespace MyCollections.Tests.MyList
         [InlineData(100)]
         [InlineData(102)]
         [InlineData(1000)]
-        public void Find_Invalid_Int(int index)
+        public void Index_Invalid_Int(int index)
         {
             // Act
-            Action act = () => _collectionInt.Find(index);
+            var act = Assert.Throws<IndexOutOfRangeException>(() => _collectionInt[index]);
 
             // Assert
-            act.Should().Throw<IndexOutOfRangeException>();
+            Assert.Equal($"Index: {index}, Count objects in collection: {100}", act.Message);
         }
 
         [Theory]
@@ -65,11 +65,11 @@ namespace MyCollections.Tests.MyList
         [InlineData("Ethan", 12, "Joseph", 25)]
         [InlineData("Logan", 15, "Anthony", 40)]
         [InlineData("Liam", 0, "Noah", 1)]
-        public void Find_Valid_String(string expectedResult1, int index1, string expectedResult2, int index2)
+        public void Index_Valid_String(string expectedResult1, int index1, string expectedResult2, int index2)
         {
             // Act
-            var result1 = _collectionString.Find(index1);
-            var result2 = _collectionString.Find(index2);
+            var result1 = _collectionString[index1];
+            var result2 = _collectionString[index2];
 
             // Assert
             result1.Should().Be(expectedResult1);
@@ -77,11 +77,11 @@ namespace MyCollections.Tests.MyList
         }
 
         [Theory]
-        [MemberData(nameof(MyListSourceDataForFind.GetDataForFindValidClass), MemberType = typeof(MyListSourceDataForFind))]
-        public void Find_Valid_Class(Employee expectedResult, int index)
+        [MemberData(nameof(MyListSourceDataForIndex.GetDataForIndexValidClass), MemberType = typeof(MyListSourceDataForIndex))]
+        public void Index_Valid_Class(Employee expectedResult, int index)
         {
             // Act
-            var result = _collectionClass.Find(index);
+            var result = _collectionClass[index];
 
             // Assert
             result.Should().Be(expectedResult);

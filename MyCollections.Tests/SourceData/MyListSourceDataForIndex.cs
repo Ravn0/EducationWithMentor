@@ -5,9 +5,9 @@ using MyCollections.Tests.ClassForTests;
 
 namespace MyCollections.Tests.SourceData
 {
-    public class MyListSourceDataForFind
+    public class MyListSourceDataForIndex
     {
-        public static IEnumerable<object[]> GetDataForFindValidInt()
+        public static IEnumerable<object[]> GetDataForIndexValidInt()
         {
             var array = new int[10];
             var value = 0;
@@ -71,7 +71,7 @@ namespace MyCollections.Tests.SourceData
             };
         }
 
-        public static IEnumerable<object[]> GetDataForFindValidClass()
+        public static IEnumerable<object[]> GetDataForIndexValidClass()
         {
             var employee = new Employee { Name = "Levi", Age = 17 };
             var index = 17;

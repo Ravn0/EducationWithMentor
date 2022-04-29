@@ -21,7 +21,7 @@ namespace MyCollections.Generic
                     return _array[index];
                 }
 
-                throw new IndexOutOfRangeException();
+                throw new IndexOutOfRangeException($"Index: {index}, Count objects in collection: {Count}");
             }
             set
             {
@@ -31,7 +31,7 @@ namespace MyCollections.Generic
                 }
                 else
                 {
-                    throw new IndexOutOfRangeException();
+                    throw new IndexOutOfRangeException($"Index: {index}, Count objects in collection: {Count}");
                 }
             }
         }
@@ -389,23 +389,6 @@ namespace MyCollections.Generic
             }
 
             return result;
-        }
-
-        /// <summary>
-        /// Searches for the element at the specified index of the List<T>.
-        /// </summary>
-        /// <param name="index">The zero-based starting index of the search range.</param>
-        /// <returns></returns>
-        public T Find(int index)
-        {
-            if (ValidateIndex(index, Count))
-            {
-                return _array[index];
-            }
-            else
-            {
-                throw new IndexOutOfRangeException($"Index: {index}, Count objects in collection: {Count}");
-            }
         }
 
         public override string ToString()

@@ -37,7 +37,5 @@
         bool Contains(T item);
 
         int IndexOf(T item);
-
-        T Find(int index);
     }
 }
