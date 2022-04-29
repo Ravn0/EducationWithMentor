@@ -56,7 +56,7 @@ namespace MyCollections.Tests.MyList
             var act = Assert.Throws<IndexOutOfRangeException>(() => _collectionInt[index]);
 
             // Assert
-            Assert.Equal($"Index: {index}, Count objects in collection: {100}", act.Message);
+            Assert.Equal($"Index: {index}, Count objects in collection: {_collectionInt.Count}", act.Message);
         }
 
         [Theory]
