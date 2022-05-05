@@ -33,5 +33,9 @@
         void RemoveFirst(T value);
 
         int RemoveAll(T value);
+
+        bool Contains(T item);
+
+        int IndexOf(T item);
     }
 }

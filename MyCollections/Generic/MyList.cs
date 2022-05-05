@@ -21,7 +21,7 @@ namespace MyCollections.Generic
                     return _array[index];
                 }
 
-                throw new IndexOutOfRangeException();
+                throw new IndexOutOfRangeException($"Index: {index}, Count objects in collection: {Count}");
             }
             set
             {
@@ -31,7 +31,7 @@ namespace MyCollections.Generic
                 }
                 else
                 {
-                    throw new IndexOutOfRangeException();
+                    throw new IndexOutOfRangeException($"Index: {index}, Count objects in collection: {Count}");
                 }
             }
         }
@@ -325,6 +325,70 @@ namespace MyCollections.Generic
             }
 
             return countRemoves;
+        }
+
+        /// <summary>
+        /// Determines whether an element is in the MyList<T>.
+        /// </summary>
+        /// <param name="item">The object to locate in the MyList<T>. The value can be null for reference types.</param>
+        /// <returns></returns>
+        public bool Contains(T item)
+        {
+            var result = false;
+
+            for (int i = 0; i < Count; i++)
+            {
+                if (_array[i] == null && item == null)
+                {
+                    result = true;
+                    break;
+                }
+
+                if (_array[i] == null && item != null)
+                {
+                    continue;
+                }
+
+                if (_array[i].Equals(item))
+                {
+                    result = true;
+                    break;
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Searches for the specified object and returns the zero-based index of the first occurrence within the entire List<T>.
+        /// </summary>
+        /// <param name="item">The object to locate in the List<T>. The value can be null for reference types.</param>
+        /// <returns></returns>
+        public int IndexOf(T item)
+        {
+            var result = -1;
+
+            for (int i = 0; i < Count; i++)
+            {
+                if (_array[i] == null && item == null)
+                {
+                    result = i;
+                    break;
+                }
+
+                if (_array[i] == null && item != null)
+                {
+                    continue;
+                }
+
+                if (_array[i].Equals(item))
+                {
+                    result = i;
+                    break;
+                }
+            }
+
+            return result;
         }
 
         public override string ToString()
